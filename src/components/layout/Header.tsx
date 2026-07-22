@@ -22,7 +22,10 @@ export function Header() {
   const isTransparent = isHomepage && !scrolled;
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isTransparent ? 'bg-transparent py-6' : 'bg-zinc-950 py-4 shadow-lg border-b border-zinc-900'} text-white px-8 md:px-16 flex justify-between items-center`}>
+    <header 
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${isTransparent ? 'bg-transparent py-6' : 'bg-background/95 backdrop-blur-md py-4 shadow-xl border-b'} text-white px-8 md:px-16 flex justify-between items-center`}
+      style={!isTransparent ? { borderColor: 'rgba(255,255,255,0.08)' } : {}}
+    >
       <div className="flex items-center">
         <Link href="/" className="flex items-center gap-2">
           <img 
@@ -33,7 +36,7 @@ export function Header() {
         </Link>
       </div>
       
-      <nav className="hidden md:flex gap-10 items-center text-sm uppercase tracking-widest font-light">
+      <nav className="hidden md:flex gap-10 items-center text-xs uppercase tracking-[0.2em] font-medium text-muted-foreground">
         <Link href="/about" className="hover:text-primary transition-colors">About</Link>
         <Link href="/projects" className="hover:text-primary transition-colors">Projects</Link>
         <Link href="/services" className="hover:text-primary transition-colors">Services</Link>
@@ -41,7 +44,7 @@ export function Header() {
       </nav>
 
       <div className="hidden md:flex items-center gap-4">
-        <Button variant="outline" className={`border-white bg-transparent hover:bg-white hover:text-black font-light uppercase tracking-wider rounded-none px-8 ${isTransparent ? 'text-white' : 'text-white'}`}>
+        <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary hover:text-background font-medium uppercase tracking-[0.15em] rounded-none px-8 bg-transparent transition-all">
           Sign In
         </Button>
       </div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, IndianRupee } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 interface ProjectCardProps {
   id: string;
@@ -15,34 +15,80 @@ interface ProjectCardProps {
 export function ProjectCard({ id, name, developer, location, price, imageUrl, type, status }: ProjectCardProps) {
   return (
     <Link href={`/projects/${id}`} className="group block cursor-pointer h-full">
-      <div className="bg-card border border-border h-full flex flex-col transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(200,160,80,0.1)] hover:border-primary/30">
-        <div className="relative aspect-[4/3] overflow-hidden bg-zinc-800">
-          <div 
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-            style={{ backgroundImage: `url("${imageUrl}")` }}
+      <div 
+        className="bg-card h-full flex flex-col overflow-hidden rounded-2xl border transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)]"
+        style={{ borderColor: "rgba(255,255,255,0.08)" }}
+      >
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <img
+            src={imageUrl}
+            alt={name}
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          {/* Overlay gradient for text readability if needed */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(23,23,27,0) 55%, rgba(23,23,27,0.85) 100%)",
+            }}
+          />
           
-          <div className="absolute top-4 left-4 bg-background/90 backdrop-blur text-xs uppercase tracking-widest px-3 py-1 font-medium shadow-sm">
+          <div
+            className="absolute left-4 top-4 rounded-full border px-3 py-1 font-mono text-[11px] tracking-wider"
+            style={{
+              borderColor: "rgba(245,243,239,0.25)",
+              color: "#F5F3EF",
+              background: "rgba(23,23,27,0.55)",
+              backdropFilter: "blur(6px)",
+            }}
+          >
+            {type.toUpperCase()}
+          </div>
+
+          <div
+            className="absolute right-4 top-4 rounded-full px-3 py-1 text-[11px] font-medium tracking-wide text-background bg-primary"
+          >
             {status}
           </div>
-          <div className="absolute bottom-4 left-4 flex gap-2">
-             <span className="bg-primary/90 text-primary-foreground text-xs tracking-wider px-2 py-1 shadow-sm">{type}</span>
+
+          {/* Price tag, deed-plaque style */}
+          <div
+            className="absolute bottom-4 left-4 rounded-lg border px-3 py-1.5"
+            style={{
+              borderColor: "rgba(245,243,239,0.18)",
+              background: "rgba(23,23,27,0.6)",
+              backdropFilter: "blur(6px)",
+            }}
+          >
+            <span
+              className="font-serif text-xl tracking-wide text-primary"
+            >
+              {price}
+            </span>
           </div>
         </div>
         
-        <div className="p-6 flex flex-col flex-1">
-          <h3 className="text-xl font-medium mb-2 group-hover:text-primary transition-colors">{name}</h3>
-          <p className="text-sm text-muted-foreground font-light mb-6 flex items-center">
-            <MapPin className="w-3 h-3 mr-2" /> {location} <span className="mx-2 text-border">|</span> By {developer}
-          </p>
+        <div className="flex flex-col flex-1 justify-between px-5 py-4">
+          <div>
+            <h3 className="text-lg font-serif font-medium leading-snug group-hover:text-primary transition-colors">{name}</h3>
+            <div className="mt-1 flex flex-col gap-1 text-sm text-muted-foreground">
+              <div className="flex items-center gap-1">
+                <MapPin className="h-3.5 w-3.5" />
+                {location}
+              </div>
+              <div className="font-light opacity-80 mt-1">
+                Developer: {developer}
+              </div>
+            </div>
+          </div>
           
-          <div className="flex justify-between items-center border-t border-border pt-6 mt-auto">
-            <span className="text-lg font-medium flex items-center">
-               <IndianRupee className="w-4 h-4 mr-1 text-primary" /> {price}
-            </span>
-            <span className="text-xs uppercase tracking-widest text-primary font-medium group-hover:underline underline-offset-4 transition-all">Explore →</span>
+          <div
+            className="flex items-center justify-between border-t pt-3 mt-4 font-mono text-xs text-muted-foreground"
+            style={{ borderColor: "rgba(255,255,255,0.08)" }}
+          >
+             <span className="opacity-70 group-hover:text-primary group-hover:opacity-100 transition-colors uppercase tracking-widest">
+               Explore Details →
+             </span>
           </div>
         </div>
       </div>

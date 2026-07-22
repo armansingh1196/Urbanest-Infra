@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import { X, BadgeCheck, Info, RotateCcw, MapPin, Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 /* ---------------------------------------------------------------------
    Design tokens — editorial real-estate ledger, not another dark-glass panel.
@@ -249,14 +250,23 @@ function SwipeCard({
 
           {/* Spec strip — mono, like a listing sheet */}
           <div
-            className="flex items-center gap-4 border-t pt-3 font-mono text-xs"
+            className="flex items-center justify-between border-t pt-3 font-mono text-xs"
             style={{ borderColor: TOKENS.hairline, color: TOKENS.inkMuted }}
           >
-            <span>{property.beds} BD</span>
-            <span className="opacity-40">/</span>
-            <span>{property.baths} BA</span>
-            <span className="opacity-40">/</span>
-            <span>{property.sqft.toLocaleString()} SQFT</span>
+            <div className="flex items-center gap-4">
+              <span>{property.beds} BD</span>
+              <span className="opacity-40">/</span>
+              <span>{property.baths} BA</span>
+              <span className="opacity-40">/</span>
+              <span>{property.sqft.toLocaleString()} SQFT</span>
+            </div>
+            
+            <Link 
+              href={`/projects/${property.id}`}
+              className="flex items-center gap-1.5 hover:text-white transition-colors pointer-events-auto"
+            >
+              DETAILS <Info className="h-3.5 w-3.5" />
+            </Link>
           </div>
         </div>
 
@@ -395,47 +405,7 @@ export function PropertyMatcher({
         )}
       </div>
 
-      {/* Actions */}
-      {!isExhausted && (
-        <div className="mt-8 flex items-center gap-5">
-          <button
-            aria-label="Pass on this listing"
-            onClick={() => advance("left")}
-            className="flex h-14 w-14 items-center justify-center rounded-full border transition-transform hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 cursor-pointer"
-            style={{ borderColor: TOKENS.hairline, background: TOKENS.surfaceRaised }}
-          >
-            <X className="h-6 w-6" style={{ color: TOKENS.inkMuted }} />
-          </button>
 
-          <button
-            aria-label="Undo last decision"
-            onClick={undo}
-            disabled={!lastDecision}
-            className="flex h-11 w-11 items-center justify-center rounded-full border transition-transform hover:scale-105 active:scale-95 disabled:opacity-30 focus-visible:outline focus-visible:outline-2 cursor-pointer"
-            style={{ borderColor: TOKENS.hairline, background: TOKENS.surfaceRaised }}
-          >
-            <RotateCcw className="h-4 w-4" style={{ color: TOKENS.inkMuted }} />
-          </button>
-
-          <button
-            aria-label="View listing details"
-            onClick={() => current && router.push(`/projects/${current.id}`)}
-            className="flex h-11 w-11 items-center justify-center rounded-full border transition-transform hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 cursor-pointer"
-            style={{ borderColor: TOKENS.hairline, background: TOKENS.surfaceRaised }}
-          >
-            <Info className="h-4 w-4" style={{ color: TOKENS.inkMuted }} />
-          </button>
-
-          <button
-            aria-label="Save this listing"
-            onClick={() => advance("right")}
-            className="flex h-14 w-14 items-center justify-center rounded-full border transition-transform hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 cursor-pointer"
-            style={{ borderColor: TOKENS.brass, background: TOKENS.surfaceRaised }}
-          >
-            <BadgeCheck className="h-6 w-6" style={{ color: TOKENS.brass }} />
-          </button>
-        </div>
-      )}
 
       {/* Toast Notification */}
       <AnimatePresence>

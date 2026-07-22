@@ -43,23 +43,23 @@ export default function HomePage() {
         </motion.div>
 
         <motion.div 
-          className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20"
+          className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 mt-20 flex flex-col justify-end h-full pb-32"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
         >
-          <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl font-light text-white tracking-wide leading-tight mb-6 drop-shadow-lg">
-            Find Your Dream Property in <span className="font-medium text-primary">Dhanbad</span>
+          <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-serif text-white tracking-wide leading-tight mb-4 drop-shadow-2xl max-w-4xl">
+            Find Your Dream Property in <span className="text-primary italic">Dhanbad</span>
           </motion.h1>
-          <motion.p variants={fadeInUp} className="text-lg md:text-xl text-zinc-300 font-light mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+          <motion.p variants={fadeInUp} className="text-lg md:text-2xl text-zinc-300 font-light mb-12 max-w-2xl leading-relaxed drop-shadow-md">
             Trusted Channel Partner for Premium Real Estate Projects. See value clearly and invest with absolute confidence.
           </motion.p>
           
-          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-sm tracking-wider uppercase font-medium px-8 py-6 rounded-none shadow-[0_0_20px_rgba(200,160,80,0.3)] transition-all hover:scale-105">
+          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-6">
+            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-sm tracking-widest uppercase font-medium px-10 py-7 rounded-none shadow-[0_0_30px_rgba(184,149,106,0.2)] transition-all hover:scale-105">
               Explore Projects
             </Button>
-            <Button size="lg" variant="outline" className="text-white border-white bg-transparent hover:bg-white hover:text-black text-sm tracking-wider uppercase font-medium px-8 py-6 rounded-none backdrop-blur-sm transition-all hover:scale-105">
+            <Button size="lg" variant="outline" className="text-white border-white/30 bg-black/20 hover:bg-white hover:text-black text-sm tracking-widest uppercase font-medium px-10 py-7 rounded-none backdrop-blur-md transition-all hover:scale-105">
               Book Consultation
             </Button>
           </motion.div>
@@ -87,13 +87,13 @@ export default function HomePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
       >
-        <div className="bg-card/90 backdrop-blur-xl shadow-2xl p-8 border border-white/10 dark:border-zinc-800/50 rounded-sm">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
-            <div className="space-y-2">
-              <label className="text-xs uppercase tracking-wider font-medium text-muted-foreground">Location</label>
-              <div className="flex items-center border-b border-border pb-2 group">
-                <MapPin className="w-4 h-4 text-primary mr-2 group-hover:scale-110 transition-transform" />
-                <select className="bg-transparent w-full outline-none text-sm font-light text-foreground appearance-none cursor-pointer">
+        <div className="bg-[#1E1E23]/95 backdrop-blur-xl shadow-2xl p-6 md:p-8 border border-white/5 rounded-none flex flex-col md:flex-row items-center gap-6">
+          <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-white/10">
+            <div className="space-y-1 md:px-6 first:pl-0">
+              <label className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Location</label>
+              <div className="flex items-center group">
+                <MapPin className="w-4 h-4 text-primary mr-3 group-hover:scale-110 transition-transform" />
+                <select className="bg-transparent w-full outline-none text-sm font-serif tracking-wide text-foreground appearance-none cursor-pointer">
                   <option>All Locations</option>
                   <option>Dhanbad Central</option>
                   <option>Saraidhela</option>
@@ -101,11 +101,11 @@ export default function HomePage() {
               </div>
             </div>
             
-            <div className="space-y-2">
-              <label className="text-xs uppercase tracking-wider font-medium text-muted-foreground">Property Type</label>
-              <div className="flex items-center border-b border-border pb-2 group">
-                <Home className="w-4 h-4 text-primary mr-2 group-hover:scale-110 transition-transform" />
-                <select className="bg-transparent w-full outline-none text-sm font-light text-foreground appearance-none cursor-pointer">
+            <div className="space-y-1 pt-4 md:pt-0 md:px-6">
+              <label className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Property Type</label>
+              <div className="flex items-center group">
+                <Home className="w-4 h-4 text-primary mr-3 group-hover:scale-110 transition-transform" />
+                <select className="bg-transparent w-full outline-none text-sm font-serif tracking-wide text-foreground appearance-none cursor-pointer">
                   <option>Any Type</option>
                   <option>Residential</option>
                   <option>Commercial</option>
@@ -114,11 +114,11 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-xs uppercase tracking-wider font-medium text-muted-foreground">Budget</label>
-              <div className="flex items-center border-b border-border pb-2 group">
-                <span className="text-primary font-medium mr-2 group-hover:scale-110 transition-transform">₹</span>
-                <select className="bg-transparent w-full outline-none text-sm font-light text-foreground appearance-none cursor-pointer">
+            <div className="space-y-1 pt-4 md:pt-0 md:px-6">
+              <label className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Budget</label>
+              <div className="flex items-center group">
+                <span className="text-primary font-medium mr-3 group-hover:scale-110 transition-transform">₹</span>
+                <select className="bg-transparent w-full outline-none text-sm font-serif tracking-wide text-foreground appearance-none cursor-pointer">
                   <option>Any Budget</option>
                   <option>Under 50L</option>
                   <option>50L - 1Cr</option>
@@ -126,12 +126,12 @@ export default function HomePage() {
                 </select>
               </div>
             </div>
-
-            <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-none py-6 uppercase tracking-widest font-medium text-xs transition-transform hover:scale-[1.02]">
-              Search
-              <Search className="w-4 h-4 ml-2" />
-            </Button>
           </div>
+
+          <Button className="w-full md:w-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-10 py-7 uppercase tracking-widest font-medium text-xs transition-transform hover:scale-105 flex-shrink-0">
+            Search
+            <Search className="w-4 h-4 ml-3" />
+          </Button>
         </div>
       </motion.section>
 
