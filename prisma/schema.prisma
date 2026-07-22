@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  image     String?
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  leads     Lead[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Developer {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  logo        String?
+  website     String?
+  projects    Project[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Project {
+  id                  String   @id @default(cuid())
+  name                String
+  developerId         String
+  developer           Developer @relation(fields: [developerId], references: [id])
+  location            String
+  city                String    @default("Dhanbad")
+  coordinates         String?
+  propertyType        String
+  startingPrice       Float
+  priceRange          String?
+  configuration       String
+  status              String
+  reraNumber          String?
+  amenities           String[]
+  nearbySchools       String[]
+  nearbyHospitals     String[]
+  nearbyMarkets       String[]
+  distanceCityCenter  Float?
+  images              String[]
+  masterPlanUrl       String?
+  floorPlansUrls      String[]
+  availableUnits      Int?
+  contactPerson       String?
+  brochureUrl         String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  leads               Lead[]
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  message   String?
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id])
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  type      LeadType
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum LeadType {
+  SITE_VISIT
+  BROCHURE_DOWNLOAD
+  CONTACT
+}
