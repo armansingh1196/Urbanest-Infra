@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const NAV_LINKS = [
   { href: '/', label: 'Home' },
@@ -85,30 +86,64 @@ export function Header() {
         {menuOpen ? <X className="w-7 h-7 stroke-1" /> : <Menu className="w-7 h-7 stroke-1" />}
       </button>
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="md:hidden fixed inset-0 top-0 bg-background/98 backdrop-blur-xl flex flex-col items-center justify-center gap-10 z-40">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`font-serif text-3xl tracking-wide transition-colors hover:text-primary ${
-                pathname === link.href ? 'text-primary' : 'text-foreground'
-              }`}
+      {/* Mobile menu (Sidebar) */}
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMenuOpen(false)}
+              className="md:hidden fixed inset-0 top-0 bg-foreground/20 backdrop-blur-sm z-40"
+            />
+            {/* Sidebar Drawer */}
+            <motion.div 
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="md:hidden fixed top-0 right-0 h-[100dvh] w-4/5 max-w-sm bg-background border-l border-border flex flex-col pt-32 px-10 gap-10 z-40 shadow-2xl"
             >
-              {link.label}
-            </Link>
-          ))}
-          <Link href="/contact" onClick={() => setMenuOpen(false)} tabIndex={-1}>
-            <Button
-              variant="outline"
-              className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground font-mono uppercase tracking-[0.15em] rounded-none px-10 py-6 bg-transparent mt-4"
-            >
-              Enquire
-            </Button>
-          </Link>
-        </div>
-      )}
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 + (i * 0.05) }}
+                >
+                  <Link
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className={`font-serif text-3xl tracking-wide transition-colors hover:text-primary block ${
+                      pathname === link.href ? 'text-primary' : 'text-foreground'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="mt-auto mb-16"
+              >
+                <Link href="/contact" onClick={() => setMenuOpen(false)} tabIndex={-1}>
+                  <Button
+                    variant="outline"
+                    className="w-full border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground font-mono uppercase tracking-[0.15em] rounded-none py-6 bg-transparent"
+                  >
+                    Enquire
+                  </Button>
+                </Link>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

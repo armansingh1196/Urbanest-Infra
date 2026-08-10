@@ -43,7 +43,7 @@ export default function HomePage() {
         </motion.div>
 
         <motion.div
-          className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 mt-20 flex flex-col justify-center h-full pb-16"
+          className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 mt-32 md:mt-20 flex flex-col justify-center h-full pt-12 md:pt-0 pb-16"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}

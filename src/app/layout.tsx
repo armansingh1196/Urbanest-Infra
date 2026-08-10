@@ -34,9 +34,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${workSans.variable} ${fraunces.variable} ${spaceMono.variable} h-full antialiased`}
+      className={`${workSans.variable} ${fraunces.variable} ${spaceMono.variable} h-full antialiased overflow-x-hidden`}
     >
-      <body className="min-h-full flex flex-col text-foreground relative bg-background">
+      <body className="min-h-full flex flex-col text-foreground relative bg-background overflow-x-hidden w-full">
         {/* Global backdrop: a faint drafting-table grid instead of a stock photo */}
         <div className="fixed inset-0 z-[-2] blueprint-grid" />
         <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_at_top,rgba(193,95,53,0.06),transparent_60%)]" />
