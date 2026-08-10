@@ -5,48 +5,7 @@ import { Filter, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, Variants } from "framer-motion";
 
-const MOCK_PROJECTS = [
-  {
-    id: "1",
-    name: "Emerald Heights",
-    developer: "Siddhi Developers",
-    location: "Saraidhela, Dhanbad",
-    price: "65 L - 1.2 Cr",
-    imageUrl: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
-    type: "Residential",
-    status: "Under Construction"
-  },
-  {
-    id: "2",
-    name: "The Imperial",
-    developer: "Raj Builders",
-    location: "Dhanbad Central",
-    price: "1.5 Cr Onwards",
-    imageUrl: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
-    type: "Luxury",
-    status: "Ready to Move"
-  },
-  {
-    id: "3",
-    name: "Aura Commercial",
-    developer: "Apex Group",
-    location: "Bank More, Dhanbad",
-    price: "80 L Onwards",
-    imageUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
-    type: "Commercial",
-    status: "New Launch"
-  },
-  {
-    id: "4",
-    name: "Green Valley",
-    developer: "Eco Homes",
-    location: "Karmik Nagar, Dhanbad",
-    price: "45 L - 85 L",
-    imageUrl: "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=800&q=80",
-    type: "Residential",
-    status: "Ready to Move"
-  }
-];
+import { PROJECTS } from "@/data/projects";
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -65,15 +24,16 @@ export default function ProjectsPage() {
   return (
     <div className="pt-24 min-h-screen">
       {/* Header */}
-      <div className="bg-zinc-100 dark:bg-zinc-900/50 border-b border-border py-16 px-4 md:px-8">
+      <div className="site-stone blueprint-grid border-b border-border py-16 px-4 md:px-8">
         <motion.div 
           className="max-w-7xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-4xl md:text-5xl font-light tracking-wide mb-4">Discover Properties</h1>
-          <p className="text-muted-foreground font-light text-lg">Browse our curated selection of premium real estate across Dhanbad.</p>
+          <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">Portfolio</span>
+          <h1 className="text-4xl md:text-5xl font-serif tracking-wide mt-3 mb-4">Discover properties</h1>
+          <p className="font-light text-lg opacity-80">Browse our curated selection of premium real estate across India.</p>
         </motion.div>
       </div>
 
@@ -135,7 +95,7 @@ export default function ProjectsPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <p className="text-sm text-muted-foreground font-light">Showing {MOCK_PROJECTS.length} properties</p>
+            <p className="text-sm text-muted-foreground font-light">Showing {PROJECTS.length} properties</p>
             <div className="flex items-center gap-2 text-sm font-light">
                <SlidersHorizontal className="w-4 h-4 text-muted-foreground" />
                <select className="bg-transparent outline-none border-none cursor-pointer hover:text-primary transition-colors">
@@ -153,9 +113,18 @@ export default function ProjectsPage() {
             initial="hidden"
             animate="visible"
           >
-            {MOCK_PROJECTS.map(project => (
+            {PROJECTS.map(project => (
               <motion.div key={project.id} variants={fadeInUp}>
-                <ProjectCard {...project} />
+                <ProjectCard 
+                  id={project.id}
+                  name={project.name}
+                  developer={project.developer}
+                  location={project.location}
+                  price={project.price}
+                  imageUrl={project.images[0]}
+                  type={project.type.includes("Commercial") ? "Commercial" : project.type.includes("Luxury") ? "Luxury" : "Residential"}
+                  status={project.status}
+                />
               </motion.div>
             ))}
           </motion.div>

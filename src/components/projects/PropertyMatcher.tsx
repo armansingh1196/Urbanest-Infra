@@ -11,6 +11,7 @@ import {
 import { X, BadgeCheck, Info, RotateCcw, MapPin, Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { PROJECTS } from "@/data/projects";
 
 /* ---------------------------------------------------------------------
    Design tokens — editorial real-estate ledger, not another dark-glass panel.
@@ -19,15 +20,15 @@ import Link from "next/link";
 --------------------------------------------------------------------- */
 
 const TOKENS = {
-  bg: "#17171B",
-  surface: "#1E1E23",
-  surfaceRaised: "#26262C",
-  brass: "#B8956A",
-  brassSoft: "#C9A876",
-  sage: "#7A9B76",
-  ink: "#F5F3EF",
-  inkMuted: "#9C9A94",
-  hairline: "rgba(255,255,255,0.08)",
+  bg: "var(--background)",
+  surface: "var(--card)",
+  surfaceRaised: "var(--card)",
+  brass: "var(--primary)",
+  brassSoft: "var(--primary)",
+  sage: "var(--secondary)",
+  ink: "var(--foreground)",
+  inkMuted: "var(--muted-foreground)",
+  hairline: "var(--border)",
 };
 
 export interface Property {
@@ -43,59 +44,18 @@ export interface Property {
   image: string;
 }
 
-const SAMPLE_PROPERTIES: Property[] = [
-  {
-    id: "1",
-    lot: 1,
-    title: "Emerald Heights",
-    location: "Saraidhela, Dhanbad",
-    price: 4250000,
-    beds: 4,
-    baths: 3,
-    sqft: 3200,
-    tag: "New Listing",
-    image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: "2",
-    lot: 2,
-    title: "The Imperial",
-    location: "Dhanbad Central",
-    price: 8900000,
-    beds: 6,
-    baths: 7,
-    sqft: 7400,
-    tag: "Price Drop",
-    image:
-      "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: "3",
-    lot: 3,
-    title: "Aura Commercial",
-    location: "Bank More, Dhanbad",
-    price: 1875000,
-    beds: 2,
-    baths: 2,
-    sqft: 1650,
-    image:
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: "4",
-    lot: 4,
-    title: "Green Valley",
-    location: "Karmik Nagar, Dhanbad",
-    price: 2650000,
-    beds: 5,
-    baths: 4,
-    sqft: 4100,
-    tag: "New Listing",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
-  }
-];
+const MAPPED_PROPERTIES: Property[] = PROJECTS.map((p, index) => ({
+  id: p.id,
+  lot: index + 1,
+  title: p.name,
+  location: p.location,
+  price: p._matchStats.priceValue,
+  beds: p._matchStats.beds,
+  baths: p._matchStats.baths,
+  sqft: p._matchStats.sqft,
+  tag: p._matchStats.tag,
+  image: p.images[0]
+}));
 
 const SWIPE_THRESHOLD = 120;
 const SWIPE_VELOCITY = 500;
@@ -186,7 +146,7 @@ function SwipeCard({
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(180deg, rgba(23,23,27,0) 55%, rgba(23,23,27,0.85) 100%)",
+                "linear-gradient(180deg, rgba(248,245,240,0) 55%, rgba(248,245,240,0.95) 100%)",
             }}
           />
 
@@ -194,13 +154,13 @@ function SwipeCard({
           <div
             className="absolute left-4 top-4 rounded-full border px-3 py-1 font-mono text-[11px] tracking-wider"
             style={{
-              borderColor: "rgba(245,243,239,0.25)",
-              color: TOKENS.ink,
-              background: "rgba(23,23,27,0.55)",
+              borderColor: "var(--border)",
+              color: "var(--foreground)",
+              background: "rgba(255,255,255,0.75)",
               backdropFilter: "blur(6px)",
             }}
           >
-            LOT №{String(property.lot).padStart(3, "0")}
+            PROJECT №{String(property.lot).padStart(2, "0")}
           </div>
 
           {property.tag && (
@@ -216,8 +176,8 @@ function SwipeCard({
           <div
             className="absolute bottom-4 left-4 rounded-lg border px-3 py-1.5"
             style={{
-              borderColor: "rgba(245,243,239,0.18)",
-              background: "rgba(23,23,27,0.6)",
+              borderColor: "var(--border)",
+              background: "rgba(255,255,255,0.8)",
               backdropFilter: "blur(6px)",
             }}
           >
@@ -263,7 +223,7 @@ function SwipeCard({
             
             <Link 
               href={`/projects/${property.id}`}
-              className="flex items-center gap-1.5 hover:text-white transition-colors pointer-events-auto"
+              className="flex items-center gap-1.5 hover:text-foreground transition-colors pointer-events-auto"
             >
               DETAILS <Info className="h-3.5 w-3.5" />
             </Link>
@@ -292,7 +252,7 @@ function SwipeCard({
 --------------------------------------------------------------------- */
 
 export function PropertyMatcher({
-  properties = SAMPLE_PROPERTIES,
+  properties = MAPPED_PROPERTIES,
 }: {
   properties?: Property[];
 }) {
@@ -351,7 +311,7 @@ export function PropertyMatcher({
       </div>
 
       {/* Stack */}
-      <div className="relative h-[520px] md:h-[65vh] md:min-h-[500px] w-full">
+      <div className="relative h-[400px] sm:h-[480px] md:h-[65vh] md:min-h-[500px] w-full">
         <AnimatePresence initial={false}>
           {!isExhausted &&
             visible.map((property, i) => (

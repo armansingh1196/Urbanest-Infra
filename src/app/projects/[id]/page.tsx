@@ -1,34 +1,20 @@
 "use client";
 
-import { MapPin, Info, CheckCircle2, Building2, Map } from "lucide-react";
+import { MapPin, Info, CheckCircle2, Building2, Map, Shield, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, Variants } from "framer-motion";
-
 import { use } from "react";
+import { notFound } from "next/navigation";
+import { PROJECTS } from "@/data/projects";
 
 export default function ProjectDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   
-  // Use id for future data fetching
-  console.log("Fetching project details for ID:", id);
+  const project = PROJECTS.find(p => p.id === id);
 
-  // Mock Data
-  const project = {
-    name: "Emerald Heights",
-    developer: "Siddhi Developers",
-    location: "Saraidhela, Dhanbad",
-    price: "₹ 65 L - 1.2 Cr",
-    rera: "PRJ/DHN/001/2023",
-    status: "Under Construction",
-    config: "2, 3 & 4 BHK Premium Apartments",
-    description: "Emerald Heights redefines luxury living in Dhanbad. Strategically located in Saraidhela, it offers seamless connectivity to major schools, hospitals, and commercial hubs. Experience a lifestyle of unparalleled comfort and elegance.",
-    amenities: ["Swimming Pool", "Clubhouse", "24/7 Security", "Gymnasium", "Landscaped Gardens", "Power Backup", "Children's Play Area", "Jogging Track"],
-    images: [
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80"
-    ]
-  };
+  if (!project) {
+    notFound();
+  }
 
   const staggerContainer = {
     hidden: { opacity: 0 },
@@ -56,22 +42,22 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[50vh] md:h-[60vh]">
           <motion.div 
             variants={fadeInUp}
-            className="md:col-span-2 bg-zinc-800 bg-cover bg-center rounded-sm overflow-hidden relative group"
+            className="md:col-span-2 bg-muted bg-cover bg-center overflow-hidden relative group"
           >
              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" style={{ backgroundImage: `url("${project.images[0]}")` }} />
           </motion.div>
           <div className="hidden md:flex flex-col gap-4">
             <motion.div 
               variants={fadeInUp}
-              className="flex-1 bg-zinc-800 bg-cover bg-center rounded-sm overflow-hidden relative group"
+              className="flex-1 bg-muted bg-cover bg-center overflow-hidden relative group"
             >
                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" style={{ backgroundImage: `url("${project.images[1]}")` }} />
             </motion.div>
             <motion.div 
               variants={fadeInUp}
-              className="flex-1 bg-zinc-800 bg-cover bg-center rounded-sm relative overflow-hidden group"
+              className="flex-1 bg-muted bg-cover bg-center relative overflow-hidden group"
             >
-              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" style={{ backgroundImage: `url("${project.images[2]}")` }} />
+              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" style={{ backgroundImage: `url("${project.images[2] || project.images[0]}")` }} />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center cursor-pointer hover:bg-black/20 transition-colors backdrop-blur-[2px]">
                 <span className="text-white font-medium tracking-widest uppercase text-sm drop-shadow-md">View Gallery</span>
               </div>
@@ -95,7 +81,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
           <div>
             <div className="flex items-center gap-2 mb-4">
               <span className="bg-primary/10 text-primary px-3 py-1 text-xs uppercase tracking-widest font-medium rounded-full shadow-sm">{project.status}</span>
-              <span className="bg-zinc-100 dark:bg-zinc-800 px-3 py-1 text-xs uppercase tracking-widest font-medium rounded-full shadow-sm">RERA: {project.rera}</span>
+              <span className="bg-muted px-3 py-1 text-xs uppercase tracking-widest font-medium rounded-full shadow-sm">{project.type}</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-light tracking-wide mb-4">{project.name}</h1>
             <p className="text-muted-foreground flex items-center text-lg font-light mb-6">
@@ -119,16 +105,36 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                   <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Configuration</p>
                   <p className="font-medium">{project.config}</p>
                 </div>
-                <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Project Type</p>
-                  <p className="font-medium">Residential</p>
+                <div className="col-span-2">
+                  <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Area</p>
+                  <p className="font-medium">{project.area}</p>
                 </div>
               </div>
+              <p className="text-muted-foreground font-light leading-relaxed mb-4">
+                {project.shortDescription}
+              </p>
               <p className="text-muted-foreground font-light leading-relaxed">
-                {project.description}
+                <strong>Positioning:</strong> {project.positioning}
               </p>
             </div>
           </section>
+
+          {/* Highlights */}
+          {project.highlights && project.highlights.length > 0 && (
+            <section>
+              <h2 className="text-2xl font-light mb-6 flex items-center">
+                <CheckCircle2 className="w-6 h-6 mr-3 text-primary stroke-1" /> Key Highlights
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {project.highlights.map((highlight, idx) => (
+                  <div key={idx} className="flex items-start text-muted-foreground font-light group">
+                    <span className="w-2 h-2 rounded-full bg-primary mt-2 mr-4 shrink-0" />
+                    {highlight}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Amenities */}
           <section>
@@ -144,14 +150,74 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
               ))}
             </div>
           </section>
+          
+          {/* Floor Plans / Configurations */}
+          {(project.floorPlans || project.configurations) && (
+            <section>
+              <h2 className="text-2xl font-light mb-6 flex items-center">
+                <Layers className="w-6 h-6 mr-3 text-primary stroke-1" /> Floor Plans & Layouts
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {project.floorPlans?.map((plan, idx) => (
+                  <div key={idx} className="border border-border p-6 shadow-sm hover:border-primary/50 transition-colors">
+                    <h3 className="font-mono text-sm uppercase tracking-widest text-primary mb-2">{plan.level}</h3>
+                    {plan.area && <p className="font-medium text-lg mb-4">{plan.area}</p>}
+                    <ul className="space-y-2 text-sm text-muted-foreground font-light">
+                      {plan.features.map((feature, fIdx) => (
+                        <li key={fIdx}>• {feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+                {project.configurations?.map((config, idx) => (
+                  <div key={idx} className="border border-border p-6 shadow-sm hover:border-primary/50 transition-colors">
+                    {config.unit && <h3 className="font-mono text-sm uppercase tracking-widest text-primary mb-2">{config.unit}</h3>}
+                    <p className="font-medium text-lg mb-1">{config.config}</p>
+                    <p className="text-sm text-muted-foreground font-light">{config.area}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          
+          {/* Specifications */}
+          {project.specifications && project.specifications.length > 0 && (
+            <section>
+              <h2 className="text-2xl font-light mb-6 flex items-center">
+                <Shield className="w-6 h-6 mr-3 text-primary stroke-1" /> Specifications
+              </h2>
+              <div className="space-y-6">
+                {project.specifications.map((spec, idx) => (
+                  <div key={idx} className="border-b border-border pb-4 last:border-0 last:pb-0">
+                    <h3 className="font-medium mb-3">{spec.category}</h3>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-muted-foreground font-light">
+                      {spec.details.map((detail, dIdx) => (
+                        <li key={dIdx} className="flex items-start">
+                          <span className="text-primary mr-2">›</span> {detail}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Location / Map */}
           <section>
             <h2 className="text-2xl font-light mb-6 flex items-center">
               <Map className="w-6 h-6 mr-3 text-primary stroke-1" /> Location Map
             </h2>
-            <div className="w-full h-80 bg-zinc-200 dark:bg-zinc-800 rounded-sm flex items-center justify-center border border-border shadow-inner">
-              <p className="text-muted-foreground font-light text-sm uppercase tracking-widest">Interactive Map Placeholder</p>
+            <div className="w-full h-80 bg-muted flex items-center justify-center border border-border shadow-inner relative overflow-hidden">
+              <iframe 
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(project.location)}&t=&z=14&ie=UTF8&iwloc=&output=embed`} 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </section>
 
@@ -164,7 +230,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="sticky top-32 bg-card/80 backdrop-blur-xl border border-white/5 dark:border-zinc-800 shadow-[0_0_50px_rgba(200,160,80,0.08)] p-8 rounded-sm">
+          <div className="sticky top-32 bg-card/80 backdrop-blur-xl border border-border shadow-[0_0_50px_rgba(193,95,53,0.08)] p-8">
             <h3 className="text-xl font-medium mb-2">Interested in this property?</h3>
             <p className="text-sm text-muted-foreground font-light mb-8">Fill out the form below and our experts will get in touch with you shortly.</p>
             
@@ -175,14 +241,14 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
               </div>
               <div className="group">
                 <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground block mb-2 group-focus-within:text-primary transition-colors">Phone Number</label>
-                <input type="tel" className="w-full bg-transparent border-b border-border pb-2 outline-none focus:border-primary transition-colors text-sm font-light" placeholder="+91 98765 43210" />
+                <input type="tel" className="w-full bg-transparent border-b border-border pb-2 outline-none focus:border-primary transition-colors text-sm font-light" placeholder="+91 6203819040" />
               </div>
               <div className="group">
                 <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground block mb-2 group-focus-within:text-primary transition-colors">Email Address (Optional)</label>
                 <input type="email" className="w-full bg-transparent border-b border-border pb-2 outline-none focus:border-primary transition-colors text-sm font-light" placeholder="john@example.com" />
               </div>
               
-              <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-none py-6 uppercase tracking-widest font-medium text-xs transition-transform hover:scale-[1.02] shadow-[0_0_20px_rgba(200,160,80,0.2)]">
+              <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-none py-6 uppercase tracking-widest font-medium text-xs transition-transform hover:scale-[1.02] shadow-[0_0_20px_rgba(193,95,53,0.25)]">
                 Request Callback
               </Button>
             </form>

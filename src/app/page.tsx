@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { PROJECTS } from "@/data/projects";
 import { Search, MapPin, Building2, Home, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { PropertyMatcher } from "@/components/projects/PropertyMatcher";
+import { ScaleDivider } from "@/components/layout/ScaleDivider";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { useRef } from "react";
 
@@ -15,7 +17,7 @@ export default function HomePage() {
     offset: ["start start", "end start"],
   });
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  
+
   const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -34,73 +36,83 @@ export default function HomePage() {
       {/* Hero Section */}
       <section ref={heroRef} className="relative w-full h-screen flex items-center justify-center overflow-hidden">
         {/* Parallax Background */}
-        <motion.div 
-          className="absolute inset-0 bg-zinc-950 z-0"
+        <motion.div
+          className="absolute inset-0 bg-background z-0 flex items-end justify-center"
           style={{ y: backgroundY }}
         >
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.8))]" />
-          <div className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80")' }} />
         </motion.div>
 
-        <motion.div 
-          className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 mt-20 flex flex-col justify-end h-full pb-32"
+        <motion.div
+          className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 mt-20 flex flex-col justify-center h-full pb-16"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
         >
-          <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-serif text-white tracking-wide leading-tight mb-4 drop-shadow-2xl max-w-4xl">
-            Find Your Dream Property in <span className="text-primary italic">Dhanbad</span>
+          <motion.span variants={fadeInUp} className="font-mono text-xs uppercase tracking-[0.3em] text-primary mb-6">
+            Channel Partner — Across India
+          </motion.span>
+          <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-serif text-foreground tracking-wide leading-[1.05] mb-6 max-w-4xl">
+            Every good build starts with a proper survey.
           </motion.h1>
-          <motion.p variants={fadeInUp} className="text-lg md:text-2xl text-zinc-300 font-light mb-12 max-w-2xl leading-relaxed drop-shadow-md">
-            Trusted Channel Partner for Premium Real Estate Projects. See value clearly and invest with absolute confidence.
+          <motion.p variants={fadeInUp} className="text-lg md:text-xl text-muted-foreground font-light mb-12 max-w-2xl leading-relaxed">
+            We evaluate the builder&apos;s history, material quality, and legal clearances
+            so the property you choose holds up long after you sign.
           </motion.p>
-          
-          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-6">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-sm tracking-widest uppercase font-medium px-10 py-7 rounded-none shadow-[0_0_30px_rgba(184,149,106,0.2)] transition-all hover:scale-105">
+
+          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-5 relative z-10">
+            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-xs tracking-widest uppercase font-mono px-10 py-7 rounded-none transition-all hover:-translate-y-0.5">
               Explore Projects
             </Button>
-            <Button size="lg" variant="outline" className="text-white border-white/30 bg-black/20 hover:bg-white hover:text-black text-sm tracking-widest uppercase font-medium px-10 py-7 rounded-none backdrop-blur-md transition-all hover:scale-105">
+            <Button size="lg" variant="outline" className="text-foreground border-foreground/25 bg-background/30 hover:bg-foreground hover:text-background text-xs tracking-widest uppercase font-mono px-10 py-7 rounded-none backdrop-blur-md transition-all hover:-translate-y-0.5">
               Book Consultation
             </Button>
+          </motion.div>
+
+          <motion.div 
+            variants={fadeInUp} 
+            className="hidden md:block absolute right-0 -bottom-16 w-1/2 max-w-[600px] z-0 pointer-events-none"
+          >
+            <img src="/Building.svg" alt="Building Illustration" className="w-full h-auto object-contain mix-blend-multiply opacity-80" />
           </motion.div>
         </motion.div>
       </section>
 
       {/* Property Matcher Section */}
-      <motion.section 
-        className="relative z-20 py-20 px-4 md:px-8 w-full bg-zinc-950/50 backdrop-blur-sm border-t border-b border-white/5"
+      <motion.section
+        className="relative z-20 py-20 px-4 md:px-8 w-full bg-background border-t border-b border-border"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
         <div className="max-w-4xl mx-auto text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-light tracking-wide mb-4">Find Your Perfect Match</h2>
-          <p className="text-muted-foreground font-light text-lg">Swipe right to add to your wishlist, or view details instantly.</p>
+          <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">Chapter 02 — Discovery</span>
+          <h2 className="text-3xl md:text-4xl font-serif tracking-wide mt-3 mb-4">Find your perfect match</h2>
+          <p className="text-muted-foreground font-light text-lg">Swipe right to shortlist a property, or open it straight away for the full plan.</p>
         </div>
         <PropertyMatcher />
       </motion.section>
 
       {/* Search Section */}
-      <motion.section 
+      <motion.section
         className="relative z-20 -mt-16 px-4 md:px-8 max-w-6xl mx-auto w-full"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
       >
-        <div className="bg-[#1E1E23]/95 backdrop-blur-xl shadow-2xl p-6 md:p-8 border border-white/5 rounded-none flex flex-col md:flex-row items-center gap-6">
-          <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-white/10">
+        <div className="bg-card/95 backdrop-blur-xl shadow-2xl p-6 md:p-8 border border-border rounded-none flex flex-col md:flex-row items-center gap-6">
+          <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-border">
             <div className="space-y-1 md:px-6 first:pl-0">
               <label className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Location</label>
               <div className="flex items-center group">
                 <MapPin className="w-4 h-4 text-primary mr-3 group-hover:scale-110 transition-transform" />
                 <select className="bg-transparent w-full outline-none text-sm font-serif tracking-wide text-foreground appearance-none cursor-pointer">
                   <option>All Locations</option>
-                  <option>Dhanbad Central</option>
+                  <option>Metropolitan Areas</option>
                   <option>Saraidhela</option>
                 </select>
               </div>
             </div>
-            
+
             <div className="space-y-1 pt-4 md:pt-0 md:px-6">
               <label className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Property Type</label>
               <div className="flex items-center group">
@@ -128,7 +140,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <Button className="w-full md:w-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-10 py-7 uppercase tracking-widest font-medium text-xs transition-transform hover:scale-105 flex-shrink-0">
+          <Button className="w-full md:w-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-10 py-7 uppercase tracking-widest font-mono text-xs transition-transform hover:-translate-y-0.5 flex-shrink-0">
             Search
             <Search className="w-4 h-4 ml-3" />
           </Button>
@@ -136,68 +148,51 @@ export default function HomePage() {
       </motion.section>
 
       {/* Featured Projects */}
-      <motion.section 
+      <motion.section
         className="py-32 px-4 md:px-16 max-w-7xl mx-auto w-full"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
       >
-        <motion.div variants={fadeInUp} className="flex justify-between items-end mb-16">
+        <motion.div variants={fadeInUp} className="flex justify-between items-end mb-16 flex-wrap gap-6">
           <div>
-            <h2 className="text-3xl md:text-4xl font-light tracking-wide mb-4">Featured Projects</h2>
+            <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">Chapter 03 — Portfolio</span>
+            <h2 className="text-3xl md:text-4xl font-serif tracking-wide mt-3 mb-4">Featured projects</h2>
             <p className="text-muted-foreground font-light max-w-xl text-lg">
-              Discover our handpicked selection of premium properties, offering unmatched luxury, location, and lifestyle.
+              A short list of the developments we&apos;d actually recommend to family.
             </p>
           </div>
-          <Link href="/projects" className="hidden md:inline-flex items-center text-sm uppercase tracking-wider text-primary hover:text-primary/80 transition-colors group">
-            View All Projects <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+          <Link href="/projects" className="font-mono text-xs uppercase tracking-widest text-primary hover:underline underline-offset-4 shrink-0">
+            View all projects →
           </Link>
         </motion.div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <motion.div variants={fadeInUp}>
-            <ProjectCard 
-              id="1"
-              name="Emerald Heights"
-              developer="Siddhi Developers"
-              location="Saraidhela, Dhanbad"
-              price="65 L - 1.2 Cr"
-              imageUrl="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
-              type="Residential"
-              status="Under Construction"
-            />
-          </motion.div>
-          <motion.div variants={fadeInUp}>
-            <ProjectCard 
-              id="2"
-              name="The Imperial"
-              developer="Raj Builders"
-              location="Dhanbad Central"
-              price="1.5 Cr Onwards"
-              imageUrl="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
-              type="Luxury"
-              status="Ready to Move"
-            />
-          </motion.div>
-          <motion.div variants={fadeInUp}>
-            <ProjectCard 
-              id="3"
-              name="Aura Commercial"
-              developer="Apex Group"
-              location="Bank More, Dhanbad"
-              price="80 L Onwards"
-              imageUrl="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
-              type="Commercial"
-              status="New Launch"
-            />
-          </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {PROJECTS.slice(0, 3).map((project, i) => (
+            <motion.div key={project.id} variants={fadeInUp}>
+              <ProjectCard
+                id={project.id}
+                name={project.name}
+                developer={project.developer}
+                location={project.location}
+                price={project.price}
+                imageUrl={project.images[0]}
+                type={project.type.includes("Commercial") ? "Commercial" : project.type.includes("Luxury") ? "Luxury" : "Residential"}
+                status={project.status}
+              />
+            </motion.div>
+          ))}
         </div>
       </motion.section>
 
+      <div className="max-w-7xl mx-auto w-full px-4 md:px-16">
+        <ScaleDivider label="N 24.47° / E 86.98°" className="text-muted-foreground" />
+      </div>
+
       {/* Why Urbanest Section */}
-      <section className="bg-zinc-100 dark:bg-zinc-900/50 py-32 px-4 md:px-16 w-full relative overflow-hidden">
-        <motion.div 
+      <section className="site-stone blueprint-grid py-32 px-4 md:px-16 w-full relative overflow-hidden">
+        <motion.div
           className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center"
           initial="hidden"
           whileInView="visible"
@@ -205,54 +200,60 @@ export default function HomePage() {
           variants={staggerContainer}
         >
           <motion.div variants={fadeInUp}>
-            <h2 className="text-3xl md:text-5xl font-light tracking-wide mb-8 leading-tight">Elevating Real Estate in Dhanbad.</h2>
-            <p className="text-muted-foreground font-light text-lg leading-relaxed mb-6">
-              We are not just a real estate listing website. We are a premium advisory platform designed to help you navigate the complex property market with absolute clarity and precision.
+            <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">Chapter 04 — Why Us</span>
+            <h2 className="text-3xl md:text-5xl font-serif tracking-wide mt-3 mb-8 leading-tight">Elevating real estate.</h2>
+            <p className="font-light text-lg leading-relaxed mb-6 opacity-80">
+              We are not just a listing site. We are a premium advisory desk built to walk
+              you through a market that rewards patience and punishes guesswork.
             </p>
-            <p className="text-muted-foreground font-light text-lg leading-relaxed mb-10">
-              From site visits to home loan assistance, we stand by you at every step of your property journey, ensuring you see value clearly.
+            <p className="font-light text-lg leading-relaxed mb-10 opacity-80">
+              From the first site visit to the loan paperwork, we stay on the file until the
+              keys are in your hand.
             </p>
-            <Button variant="outline" className="rounded-none uppercase tracking-widest font-medium text-xs px-8 py-6 transition-all hover:scale-105 hover:bg-foreground hover:text-background">
-              Learn More About Us
-            </Button>
+            <Link href="/about">
+              <Button variant="outline" className="rounded-none uppercase tracking-widest font-mono text-xs px-8 py-6 transition-all hover:-translate-y-0.5 border-stone-foreground/25 text-stone-foreground hover:bg-stone-foreground hover:text-stone">
+                Learn more about us
+              </Button>
+            </Link>
           </motion.div>
           <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
-             <div className="bg-card/80 backdrop-blur-sm p-8 border border-white/5 dark:border-zinc-800 shadow-xl flex flex-col items-start gap-4 transition-transform hover:-translate-y-2 duration-500">
-                <Building2 className="w-8 h-8 text-primary" />
-                <h4 className="font-medium text-lg">Curated Properties</h4>
-                <p className="text-sm text-muted-foreground font-light">Only the most reliable developer projects make it to our platform.</p>
-             </div>
-             <div className="bg-card/80 backdrop-blur-sm p-8 border border-white/5 dark:border-zinc-800 shadow-xl flex flex-col items-start gap-4 sm:mt-12 transition-transform hover:-translate-y-2 duration-500">
-                <Home className="w-8 h-8 text-primary" />
-                <h4 className="font-medium text-lg">End-to-End Support</h4>
-                <p className="text-sm text-muted-foreground font-light">From discovery to documentation and home loans.</p>
-             </div>
+            <div className="plan-corners bg-background/90 backdrop-blur-sm p-8 border border-stone-foreground/10 shadow-xl flex flex-col items-start gap-4 transition-transform hover:-translate-y-2 duration-500 text-foreground">
+              <Building2 className="w-8 h-8 text-primary" />
+              <h4 className="font-medium text-lg font-serif">Curated properties</h4>
+              <p className="text-sm text-muted-foreground font-light">Only the developers with a delivery record make it onto our list.</p>
+            </div>
+            <div className="plan-corners bg-background/90 backdrop-blur-sm p-8 border border-stone-foreground/10 shadow-xl flex flex-col items-start gap-4 sm:mt-12 transition-transform hover:-translate-y-2 duration-500 text-foreground">
+              <Home className="w-8 h-8 text-primary" />
+              <h4 className="font-medium text-lg font-serif">End-to-end support</h4>
+              <p className="text-sm text-muted-foreground font-light">From the first shortlist to registration and the home loan.</p>
+            </div>
           </motion.div>
         </motion.div>
       </section>
 
       {/* Our Process Section */}
       <section className="py-32 px-4 md:px-16 max-w-7xl mx-auto w-full">
-        <motion.div 
+        <motion.div
           className="text-center mb-20 max-w-2xl mx-auto"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
         >
-          <h2 className="text-3xl md:text-4xl font-light tracking-wide mb-4">Seamless Property Buying</h2>
-          <p className="text-muted-foreground font-light text-lg">A structured approach to ensure you make the best investment with zero hassle.</p>
+          <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">Chapter 05 — Process</span>
+          <h2 className="text-3xl md:text-4xl font-serif tracking-wide mt-3 mb-4">Four stages, zero surprises</h2>
+          <p className="text-muted-foreground font-light text-lg">The same sequence, every time — so you always know what happens next.</p>
         </motion.div>
-        
-        <motion.div 
+
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-4 gap-8 relative"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
         >
-          <div className="hidden md:block absolute top-12 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-border to-transparent z-0 opacity-50" />
-          
+          <div className="hidden md:block absolute top-12 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent z-0 opacity-70" />
+
           {[
             { step: '01', title: 'Discovery', desc: 'Understand your requirements and budget.' },
             { step: '02', title: 'Site Visits', desc: 'Guided tours of shortlisted properties.' },
@@ -260,10 +261,10 @@ export default function HomePage() {
             { step: '04', title: 'Closure', desc: 'Documentation and loan assistance.' }
           ].map((item, i) => (
             <motion.div key={i} variants={fadeInUp} className="relative z-10 flex flex-col items-center text-center group cursor-default">
-              <div className="w-24 h-24 rounded-full bg-background border border-border flex items-center justify-center text-2xl font-light text-primary mb-6 shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(200,160,80,0.15)]">
+              <div className="w-20 h-20 rounded-full bg-background border border-border flex items-center justify-center text-xl font-mono text-primary mb-6 transition-all duration-500 group-hover:scale-110 group-hover:border-primary/50">
                 {item.step}
               </div>
-              <h4 className="text-xl font-medium mb-2">{item.title}</h4>
+              <h4 className="text-xl font-medium font-serif mb-2">{item.title}</h4>
               <p className="text-sm text-muted-foreground font-light leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
@@ -271,9 +272,9 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="relative py-32 px-4 md:px-16 w-full overflow-hidden">
-        <div className="absolute inset-0 bg-primary/5 z-0" />
-        <motion.div 
+      <section className="relative py-32 px-4 md:px-16 w-full overflow-hidden border-t border-border">
+        <div className="absolute inset-0 bg-primary/[0.04] z-0" />
+        <motion.div
           className="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center z-10"
           initial="hidden"
           whileInView="visible"
@@ -281,22 +282,22 @@ export default function HomePage() {
           variants={staggerContainer}
         >
           <motion.div variants={fadeInUp}>
-            <CheckCircle2 className="w-12 h-12 text-primary mb-8 opacity-80" />
-            <h2 className="text-3xl md:text-5xl font-light tracking-wide mb-8 leading-tight">
-              &quot;Urbanest completely changed how we viewed real estate in Dhanbad.&quot;
+            <CheckCircle2 className="w-10 h-10 text-primary mb-8 opacity-80" />
+            <h2 className="text-3xl md:text-5xl font-serif tracking-wide mb-8 leading-tight">
+              &quot;Urbanest completely changed how we viewed real estate.&quot;
             </h2>
-            <p className="text-xl font-medium mb-2 tracking-wide">— Rakesh & Priya Sharma</p>
-            <p className="text-muted-foreground font-light text-sm uppercase tracking-widest">Purchased at Emerald Heights</p>
+            <p className="text-xl font-medium mb-2 tracking-wide font-serif">— Rakesh &amp; Priya Sharma</p>
+            <p className="text-muted-foreground font-mono text-xs uppercase tracking-widest">Purchased at Emerald Heights</p>
           </motion.div>
           <motion.div variants={fadeInUp} className="grid grid-cols-1 gap-6">
-            <div className="bg-card/80 backdrop-blur-md p-10 border border-white/10 dark:border-zinc-800 shadow-2xl relative">
+            <div className="bg-card/90 backdrop-blur-md p-10 border border-border shadow-2xl relative">
               <div className="absolute -top-4 -left-4 text-6xl text-primary/20 font-serif">&quot;</div>
               <p className="font-light italic mb-8 text-lg leading-relaxed relative z-10">Professional, transparent, and extremely helpful. Their team helped us secure a home loan in record time without any of the usual stress.</p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-zinc-800 rounded-full bg-cover" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80")'}} />
+                <div className="w-12 h-12 rounded-full bg-secondary/40 flex items-center justify-center font-serif text-lg text-secondary-foreground">AV</div>
                 <div>
                   <h5 className="font-medium text-sm">Amit Verma</h5>
-                  <p className="text-xs text-muted-foreground font-light uppercase tracking-widest mt-1">Investor</p>
+                  <p className="text-xs text-muted-foreground font-mono uppercase tracking-widest mt-1">Investor</p>
                 </div>
               </div>
             </div>

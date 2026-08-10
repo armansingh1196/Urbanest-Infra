@@ -1,24 +1,29 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Work_Sans, Fraunces, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { SplashScreen } from "@/components/layout/SplashScreen";
 
-const inter = Inter({
-  variable: "--font-inter",
+const workSans = Work_Sans({
+  variable: "--font-body",
   subsets: ["latin"],
 });
 
 const fraunces = Fraunces({
-  variable: "--font-fraunces",
+  variable: "--font-display",
   subsets: ["latin"],
   axes: ["opsz", "SOFT", "WONK"],
 });
 
+const spaceMono = Space_Mono({
+  variable: "--font-mono-survey",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
 export const metadata: Metadata = {
   title: "Urbanest Infra | Premium Real Estate Advisory",
-  description: "Your trusted channel partner for premium real estate projects in Dhanbad. Discover, compare, and purchase properties confidently.",
+  description: "Your trusted channel partner for premium real estate projects across India. Discover, compare, and purchase properties confidently.",
 };
 
 export default function RootLayout({
@@ -29,20 +34,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${workSans.variable} ${fraunces.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col text-foreground relative">
-        <SplashScreen />
-        
-        {/* Global Background Image */}
-        <div className="fixed inset-0 z-[-2]">
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.15]" 
-            style={{ backgroundImage: `url("https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80")` }}
-          />
-        </div>
-        {/* Global Background Gradient Overlay */}
-        <div className="fixed inset-0 z-[-1] bg-gradient-to-b from-background/80 via-background to-background" />
+      <body className="min-h-full flex flex-col text-foreground relative bg-background">
+        {/* Global backdrop: a faint drafting-table grid instead of a stock photo */}
+        <div className="fixed inset-0 z-[-2] blueprint-grid" />
+        <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_at_top,rgba(193,95,53,0.06),transparent_60%)]" />
 
         <Header />
         <main className="flex-1 z-0">
