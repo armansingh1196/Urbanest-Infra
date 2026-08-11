@@ -34,7 +34,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative w-full min-h-[90dvh] md:h-screen flex items-center justify-center overflow-hidden">
+      <section ref={heroRef} className="relative w-full min-h-[100dvh] md:h-screen flex items-center justify-center overflow-hidden">
         {/* Parallax Background */}
         <motion.div
           className="absolute inset-0 bg-background z-0 flex items-end justify-center"
@@ -43,7 +43,7 @@ export default function HomePage() {
         </motion.div>
 
         <motion.div
-          className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 mt-16 md:mt-20 flex flex-col justify-center h-full pt-0 pb-8 md:pb-16"
+          className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 mt-24 md:mt-20 flex flex-col justify-center h-full pt-8 md:pt-0 pb-8 md:pb-16"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}

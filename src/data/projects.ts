@@ -33,6 +33,7 @@ export interface ProjectData {
   amenities: string[];
   specifications: ProjectSpecification[];
   floorPlans?: FloorPlan[];
+  floorPlanImages?: string[];
   // For PropertyMatcher mapping
   _matchStats: {
     priceValue: number;
