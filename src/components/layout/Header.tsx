@@ -80,14 +80,19 @@ export function Header() {
         </Link>
       </div>
 
-      <button
-        className="md:hidden text-foreground z-50"
-        onClick={() => setMenuOpen((v) => !v)}
-        aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-        aria-expanded={menuOpen}
-      >
-        {menuOpen ? <X className="w-7 h-7 stroke-1" /> : <Menu className="w-7 h-7 stroke-1" />}
-      </button>
+      <div className="flex md:hidden items-center gap-4 z-50">
+        <Link href="/wishlist" className="text-foreground hover:text-primary transition-colors" aria-label="Wishlist">
+          <Heart className="w-6 h-6 stroke-1" />
+        </Link>
+        <button
+          className="text-foreground"
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+        >
+          {menuOpen ? <X className="w-7 h-7 stroke-1" /> : <Menu className="w-7 h-7 stroke-1" />}
+        </button>
+      </div>
 
       {/* Mobile menu (Sidebar) */}
       <AnimatePresence>

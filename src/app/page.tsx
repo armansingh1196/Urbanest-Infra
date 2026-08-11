@@ -34,7 +34,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative w-full h-screen flex items-center justify-center overflow-hidden">
+      <section ref={heroRef} className="relative w-full min-h-[90dvh] md:h-screen flex items-center justify-center overflow-hidden">
         {/* Parallax Background */}
         <motion.div
           className="absolute inset-0 bg-background z-0 flex items-end justify-center"
@@ -43,7 +43,7 @@ export default function HomePage() {
         </motion.div>
 
         <motion.div
-          className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 mt-16 md:mt-20 flex flex-col justify-center h-full pt-0 pb-16"
+          className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 mt-16 md:mt-20 flex flex-col justify-center h-full pt-0 pb-8 md:pb-16"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
@@ -60,12 +60,16 @@ export default function HomePage() {
           </motion.p>
 
           <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-3 sm:gap-5 relative z-10">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-[10px] sm:text-xs tracking-widest uppercase font-mono px-6 py-5 md:px-10 md:py-7 rounded-none transition-all hover:-translate-y-0.5">
-              Explore Projects
-            </Button>
-            <Button size="lg" variant="outline" className="text-foreground border-foreground/25 bg-background/30 hover:bg-foreground hover:text-background text-[10px] sm:text-xs tracking-widest uppercase font-mono px-6 py-5 md:px-10 md:py-7 rounded-none backdrop-blur-md transition-all hover:-translate-y-0.5">
-              Book Consultation
-            </Button>
+            <Link href="/projects" tabIndex={-1}>
+              <Button size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-[10px] sm:text-xs tracking-widest uppercase font-mono px-6 py-5 md:px-10 md:py-7 rounded-none transition-all hover:-translate-y-0.5">
+                Explore Projects
+              </Button>
+            </Link>
+            <Link href="/contact" tabIndex={-1}>
+              <Button size="lg" variant="outline" className="w-full text-foreground border-foreground/25 bg-background/30 hover:bg-foreground hover:text-background text-[10px] sm:text-xs tracking-widest uppercase font-mono px-6 py-5 md:px-10 md:py-7 rounded-none backdrop-blur-md transition-all hover:-translate-y-0.5">
+                Book Consultation
+              </Button>
+            </Link>
           </motion.div>
 
           <motion.div 
@@ -79,7 +83,7 @@ export default function HomePage() {
 
       {/* Property Matcher Section */}
       <motion.section
-        className="relative z-20 py-20 px-4 md:px-8 w-full bg-background border-t border-b border-border"
+        className="relative z-20 py-12 md:py-20 px-4 md:px-8 w-full bg-background border-t border-b border-border"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
@@ -140,10 +144,12 @@ export default function HomePage() {
             </div>
           </div>
 
-          <Button className="w-full md:w-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-6 py-5 md:px-10 md:py-7 uppercase tracking-widest font-mono text-[10px] md:text-xs transition-transform hover:-translate-y-0.5 flex-shrink-0">
-            Search
-            <Search className="w-4 h-4 ml-2 md:ml-3" />
-          </Button>
+          <Link href="/projects" tabIndex={-1} className="w-full md:w-auto">
+            <Button className="w-full h-full min-h-[48px] md:min-h-full px-6 py-5 md:px-10 md:py-7 bg-primary text-primary-foreground hover:bg-primary/90 rounded-none uppercase tracking-widest font-mono text-[10px] md:text-xs transition-transform hover:-translate-y-0.5 flex-shrink-0">
+              Search
+              <Search className="w-4 h-4 ml-2 md:ml-3" />
+            </Button>
+          </Link>
         </div>
       </motion.section>
 
@@ -210,9 +216,9 @@ export default function HomePage() {
               From the first site visit to the loan paperwork, we stay on the file until the
               keys are in your hand.
             </p>
-            <Link href="/about">
+            <Link href="/about" tabIndex={-1}>
               <Button variant="outline" className="rounded-none uppercase tracking-widest font-mono text-xs px-8 py-6 transition-all hover:-translate-y-0.5 border-stone-foreground/25 text-stone-foreground hover:bg-stone-foreground hover:text-stone">
-                Learn more about us
+                About Us
               </Button>
             </Link>
           </motion.div>
