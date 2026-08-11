@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -67,6 +67,9 @@ export function Header() {
       </nav>
 
       <div className="hidden md:flex items-center gap-4">
+        <Link href="/wishlist" className="p-2 hover:text-primary transition-colors text-muted-foreground" aria-label="Wishlist">
+          <Heart className="w-5 h-5" />
+        </Link>
         <Link href="/contact" tabIndex={-1}>
           <Button
             variant="outline"
@@ -104,7 +107,7 @@ export function Header() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="md:hidden fixed top-0 right-0 h-[100dvh] w-4/5 max-w-sm bg-background border-l border-border flex flex-col pt-32 px-10 gap-10 z-40 shadow-2xl"
+              className="md:hidden fixed top-0 right-0 h-[100dvh] w-4/5 max-w-sm bg-background border-l border-border flex flex-col pt-24 px-8 gap-6 sm:gap-8 z-40 shadow-2xl"
             >
               {NAV_LINKS.map((link, i) => (
                 <motion.div
@@ -116,7 +119,7 @@ export function Header() {
                   <Link
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className={`font-serif text-3xl tracking-wide transition-colors hover:text-primary block ${
+                    className={`font-serif text-2xl tracking-wide transition-colors hover:text-primary block ${
                       pathname === link.href ? 'text-primary' : 'text-foreground'
                     }`}
                   >
@@ -129,12 +132,16 @@ export function Header() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="mt-auto mb-16"
+                className="mt-auto mb-8 flex flex-col gap-3"
               >
+                <Link href="/wishlist" onClick={() => setMenuOpen(false)} className="flex items-center justify-center gap-2 py-3 text-muted-foreground hover:text-primary transition-colors border border-border">
+                  <Heart className="w-4 h-4" />
+                  <span className="font-mono uppercase tracking-widest text-[10px] sm:text-xs">Wishlist</span>
+                </Link>
                 <Link href="/contact" onClick={() => setMenuOpen(false)} tabIndex={-1}>
                   <Button
                     variant="outline"
-                    className="w-full border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground font-mono uppercase tracking-[0.15em] rounded-none py-6 bg-transparent"
+                    className="w-full border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground font-mono uppercase tracking-[0.15em] text-[10px] sm:text-xs rounded-none py-5 bg-transparent"
                   >
                     Enquire
                   </Button>

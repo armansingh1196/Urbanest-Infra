@@ -30,26 +30,26 @@ export function ProjectCard({ id, name, developer, location, price, imageUrl, ty
             }}
           />
 
-          <div className="absolute left-4 top-4 border border-foreground/20 px-3 py-1 font-mono text-[10px] tracking-wider bg-background/55 backdrop-blur-sm text-foreground">
+          <div className="absolute left-3 top-3 sm:left-4 sm:top-4 border border-foreground/20 px-2 py-0.5 sm:px-3 sm:py-1 font-mono text-[9px] sm:text-[10px] tracking-wider bg-background/55 backdrop-blur-sm text-foreground">
             {type.toUpperCase()}
           </div>
 
-          <div className="absolute right-4 top-4 px-3 py-1 text-[10px] font-mono tracking-wide text-primary-foreground bg-primary">
+          <div className="absolute right-3 top-3 sm:right-4 sm:top-4 px-2 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-[10px] font-mono tracking-wide text-primary-foreground bg-primary">
             {status.toUpperCase()}
           </div>
 
           {/* Price tag, deed-plaque style */}
-          <div className="absolute bottom-4 left-4 border border-foreground/15 px-3 py-1.5 bg-background/60 backdrop-blur-sm">
-            <span className="font-serif text-xl tracking-wide text-primary">
+          <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 border border-foreground/15 px-2 py-1 sm:px-3 sm:py-1.5 bg-background/60 backdrop-blur-sm">
+            <span className="font-serif text-lg sm:text-xl tracking-wide text-primary">
               {price}
             </span>
           </div>
         </div>
 
-        <div className="flex flex-col flex-1 justify-between px-5 py-4">
+        <div className="flex flex-col flex-1 justify-between px-4 py-3 sm:px-5 sm:py-4">
           <div>
-            <h3 className="text-lg font-serif font-medium leading-snug group-hover:text-primary transition-colors">{name}</h3>
-            <div className="mt-1 flex flex-col gap-1 text-sm text-muted-foreground">
+            <h3 className="text-base sm:text-lg font-serif font-medium leading-snug group-hover:text-primary transition-colors">{name}</h3>
+            <div className="mt-1 flex flex-col gap-1 text-xs sm:text-sm text-muted-foreground">
               <div className="flex items-center gap-1">
                 <MapPin className="h-3.5 w-3.5" />
                 {location}

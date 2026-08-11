@@ -4,6 +4,7 @@ import { ProjectCard } from "@/components/projects/ProjectCard";
 import { Filter, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, Variants } from "framer-motion";
+import { useState } from "react";
 
 import { PROJECTS } from "@/data/projects";
 
@@ -21,26 +22,39 @@ const fadeInUp: Variants = {
 };
 
 export default function ProjectsPage() {
+  const [showFilters, setShowFilters] = useState(false);
+
   return (
     <div className="pt-24 min-h-screen">
       {/* Header */}
-      <div className="site-stone blueprint-grid border-b border-border py-16 px-4 md:px-8">
+      <div className="site-stone blueprint-grid border-b border-border py-6 md:py-12 px-4 md:px-8">
         <motion.div 
           className="max-w-7xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">Portfolio</span>
-          <h1 className="text-4xl md:text-5xl font-serif tracking-wide mt-3 mb-4">Discover properties</h1>
-          <p className="font-light text-lg opacity-80">Browse our curated selection of premium real estate across India.</p>
+          <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-primary">Portfolio</span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif tracking-wide mt-3 mb-4">Discover properties</h1>
+          <p className="font-light text-base md:text-lg opacity-80">Browse our curated selection of premium real estate across India.</p>
         </motion.div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 flex flex-col md:flex-row gap-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-16 flex flex-col md:flex-row gap-6 md:gap-12">
+        {/* Mobile Filter Toggle */}
+        <div className="md:hidden">
+          <Button 
+            onClick={() => setShowFilters(!showFilters)} 
+            variant="outline" 
+            className="w-full rounded-none flex items-center justify-center gap-2 uppercase tracking-widest font-mono text-[10px]"
+          >
+            <Filter className="w-4 h-4" /> {showFilters ? "Hide Filters" : "Show Filters"}
+          </Button>
+        </div>
+
         {/* Sidebar Filters */}
         <motion.aside 
-          className="w-full md:w-64 shrink-0 space-y-8"
+          className={`w-full md:w-64 shrink-0 space-y-8 ${showFilters ? 'block' : 'hidden md:block'}`}
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -90,13 +104,13 @@ export default function ProjectsPage() {
         {/* Project Grid */}
         <div className="flex-1">
           <motion.div 
-            className="flex justify-between items-center mb-8 border-b border-border pb-4"
+            className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 border-b border-border pb-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <p className="text-sm text-muted-foreground font-light">Showing {PROJECTS.length} properties</p>
-            <div className="flex items-center gap-2 text-sm font-light">
+            <p className="text-xs sm:text-sm text-muted-foreground font-light">Showing {PROJECTS.length} properties</p>
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-light">
                <SlidersHorizontal className="w-4 h-4 text-muted-foreground" />
                <select className="bg-transparent outline-none border-none cursor-pointer hover:text-primary transition-colors">
                  <option>Sort by: Recommended</option>

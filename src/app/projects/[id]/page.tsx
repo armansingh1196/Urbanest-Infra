@@ -83,17 +83,17 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
               <span className="bg-primary/10 text-primary px-3 py-1 text-xs uppercase tracking-widest font-medium rounded-full shadow-sm">{project.status}</span>
               <span className="bg-muted px-3 py-1 text-xs uppercase tracking-widest font-medium rounded-full shadow-sm">{project.type}</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-light tracking-wide mb-4">{project.name}</h1>
-            <p className="text-muted-foreground flex items-center text-lg font-light mb-6">
-              <MapPin className="w-5 h-5 mr-2 text-primary" /> {project.location}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-wide mb-3 md:mb-4">{project.name}</h1>
+            <p className="text-muted-foreground flex items-center text-base md:text-lg font-light mb-4 md:mb-6">
+              <MapPin className="w-4 h-4 md:w-5 md:h-5 mr-2 text-primary" /> {project.location}
             </p>
             <div className="text-2xl font-medium mb-8 pb-8 border-b border-border">{project.price}</div>
           </div>
 
           {/* Overview */}
           <section>
-            <h2 className="text-2xl font-light mb-6 flex items-center">
-              <Info className="w-6 h-6 mr-3 text-primary stroke-1" /> Project Overview
+            <h2 className="text-xl sm:text-2xl font-light mb-4 md:mb-6 flex items-center">
+              <Info className="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 text-primary stroke-1" /> Project Overview
             </h2>
             <div className="bg-card p-6 md:p-8 border border-border shadow-sm mb-8">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 border-b border-border pb-8">
@@ -122,8 +122,8 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
           {/* Highlights */}
           {project.highlights && project.highlights.length > 0 && (
             <section>
-              <h2 className="text-2xl font-light mb-6 flex items-center">
-                <CheckCircle2 className="w-6 h-6 mr-3 text-primary stroke-1" /> Key Highlights
+              <h2 className="text-xl sm:text-2xl font-light mb-4 md:mb-6 flex items-center">
+                <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 text-primary stroke-1" /> Key Highlights
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {project.highlights.map((highlight, idx) => (
@@ -138,9 +138,9 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
 
           {/* Amenities */}
           <section>
-            <h2 className="text-2xl font-light mb-6 flex items-center">
-              <Building2 className="w-6 h-6 mr-3 text-primary stroke-1" /> Amenities
-            </h2>
+              <h2 className="text-xl sm:text-2xl font-light mb-4 md:mb-6 flex items-center">
+                <Building2 className="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 text-primary stroke-1" /> Amenities
+              </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               {project.amenities.map((amenity, idx) => (
                 <div key={idx} className="flex items-center text-muted-foreground font-light group">
@@ -154,8 +154,8 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
           {/* Floor Plans / Configurations */}
           {(project.floorPlans || project.configurations) && (
             <section>
-              <h2 className="text-2xl font-light mb-6 flex items-center">
-                <Layers className="w-6 h-6 mr-3 text-primary stroke-1" /> Floor Plans & Layouts
+              <h2 className="text-xl sm:text-2xl font-light mb-4 md:mb-6 flex items-center">
+                <Layers className="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 text-primary stroke-1" /> Floor Plans & Layouts
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {project.floorPlans?.map((plan, idx) => (
@@ -183,8 +183,8 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
           {/* Specifications */}
           {project.specifications && project.specifications.length > 0 && (
             <section>
-              <h2 className="text-2xl font-light mb-6 flex items-center">
-                <Shield className="w-6 h-6 mr-3 text-primary stroke-1" /> Specifications
+              <h2 className="text-xl sm:text-2xl font-light mb-4 md:mb-6 flex items-center">
+                <Shield className="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 text-primary stroke-1" /> Specifications
               </h2>
               <div className="space-y-6">
                 {project.specifications.map((spec, idx) => (
@@ -205,9 +205,9 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
 
           {/* Location / Map */}
           <section>
-            <h2 className="text-2xl font-light mb-6 flex items-center">
-              <Map className="w-6 h-6 mr-3 text-primary stroke-1" /> Location Map
-            </h2>
+              <h2 className="text-xl sm:text-2xl font-light mb-4 md:mb-6 flex items-center">
+                <Map className="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 text-primary stroke-1" /> Location Map
+              </h2>
             <div className="w-full h-80 bg-muted flex items-center justify-center border border-border shadow-inner relative overflow-hidden">
               <iframe 
                 src={`https://maps.google.com/maps?q=${encodeURIComponent(project.location)}&t=&z=14&ie=UTF8&iwloc=&output=embed`} 
@@ -230,9 +230,9 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="sticky top-32 bg-card/80 backdrop-blur-xl border border-border shadow-[0_0_50px_rgba(193,95,53,0.08)] p-8">
-            <h3 className="text-xl font-medium mb-2">Interested in this property?</h3>
-            <p className="text-sm text-muted-foreground font-light mb-8">Fill out the form below and our experts will get in touch with you shortly.</p>
+          <div className="sticky top-32 bg-card/80 backdrop-blur-xl border border-border shadow-[0_0_50px_rgba(193,95,53,0.08)] p-6 md:p-8">
+            <h3 className="text-lg sm:text-xl font-medium mb-2">Interested in this property?</h3>
+            <p className="text-xs sm:text-sm text-muted-foreground font-light mb-6 md:mb-8">Fill out the form below and our experts will get in touch with you shortly.</p>
             
             <form className="space-y-6">
               <div className="group">

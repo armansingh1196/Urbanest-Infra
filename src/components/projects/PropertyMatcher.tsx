@@ -191,10 +191,10 @@ function SwipeCard({
         </div>
 
         {/* Details */}
-        <div className="flex h-[38%] flex-col justify-between px-5 py-4">
+        <div className="flex h-[38%] flex-col justify-between px-4 py-3 sm:px-5 sm:py-4">
           <div>
             <h3
-              className="text-lg font-medium leading-snug"
+              className="text-base sm:text-lg font-medium leading-snug"
               style={{ color: TOKENS.ink, fontFamily: "'Fraunces', serif" }}
             >
               {property.title}
@@ -210,10 +210,10 @@ function SwipeCard({
 
           {/* Spec strip — mono, like a listing sheet */}
           <div
-            className="flex items-center justify-between border-t pt-3 font-mono text-xs"
+            className="flex items-center justify-between border-t pt-2 sm:pt-3 font-mono text-[10px] sm:text-xs"
             style={{ borderColor: TOKENS.hairline, color: TOKENS.inkMuted }}
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <span>{property.beds} BD</span>
               <span className="opacity-40">/</span>
               <span>{property.baths} BA</span>
@@ -381,7 +381,7 @@ export function PropertyMatcher({
               borderColor: TOKENS.brass 
             }}
           >
-            <BadgeCheck className="w-5 h-5" /> Added to your ledger
+            <BadgeCheck className="w-5 h-5" /> Added to your wishlist
           </motion.div>
         )}
       </AnimatePresence>
