@@ -98,7 +98,7 @@ export default function HomePage() {
 
       {/* Search Section */}
       <motion.section
-        className="relative z-20 -mt-16 px-4 md:px-8 max-w-6xl mx-auto w-full"
+        className="relative z-20 mt-8 md:-mt-16 px-4 md:px-8 max-w-6xl mx-auto w-full"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
