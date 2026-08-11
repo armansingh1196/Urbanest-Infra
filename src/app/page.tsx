@@ -43,7 +43,7 @@ export default function HomePage() {
         </motion.div>
 
         <motion.div
-          className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 mt-32 md:mt-20 flex flex-col justify-center h-full pt-12 md:pt-0 pb-16"
+          className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 mt-16 md:mt-20 flex flex-col justify-center h-full pt-0 pb-16"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
@@ -290,11 +290,11 @@ export default function HomePage() {
             <p className="text-muted-foreground font-mono text-xs uppercase tracking-widest">Purchased at Emerald Heights</p>
           </motion.div>
           <motion.div variants={fadeInUp} className="grid grid-cols-1 gap-6">
-            <div className="bg-card/90 backdrop-blur-md p-6 md:p-10 border border-border shadow-2xl relative">
+            <div className="bg-card/90 backdrop-blur-md p-4 md:p-10 border border-border shadow-2xl relative">
               <div className="absolute -top-4 -left-4 text-6xl text-primary/20 font-serif">&quot;</div>
-              <p className="font-light italic mb-8 text-base sm:text-lg leading-relaxed relative z-10">Professional, transparent, and extremely helpful. Their team helped us secure a home loan in record time without any of the usual stress.</p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-secondary/40 flex items-center justify-center font-serif text-lg text-secondary-foreground">AV</div>
+              <p className="font-light italic mb-6 md:mb-8 text-sm md:text-lg leading-relaxed relative z-10">Professional, transparent, and extremely helpful. Their team helped us secure a home loan in record time without any of the usual stress.</p>
+              <div className="flex items-center gap-3 md:gap-4">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary/40 flex items-center justify-center font-serif text-base md:text-lg text-secondary-foreground">AV</div>
                 <div>
                   <h5 className="font-medium text-sm">Amit Verma</h5>
                   <p className="text-xs text-muted-foreground font-mono uppercase tracking-widest mt-1">Investor</p>
