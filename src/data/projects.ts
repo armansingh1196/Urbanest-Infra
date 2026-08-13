@@ -108,6 +108,11 @@ export const PROJECTS: ProjectData[] = [
       { category: "Electrical", details: ["Concealed wiring", "Modular switches"] },
       { category: "Plumbing", details: ["Branded Jaguar sanitary fittings", "Water-saving fixtures"] },
     ],
+    floorPlanImages: [
+      "/images/sunnys-86-east/plans/ground-floor-plan.png",
+      "/images/sunnys-86-east/plans/parking.png",
+      "/images/sunnys-86-east/plans/terrace-plan.png"
+    ],
     _matchStats: {
       priceValue: 7500000,
       beds: 3,
@@ -122,10 +127,10 @@ export const PROJECTS: ProjectData[] = [
     type: "Luxury Villas",
     config: "4 BHK Triplex",
     area: "3,725 sq.ft.",
-    location: "Near Balajee Petrol Pump, 4 Lane Main Road, Dhanbad, Jharkhand – 826007",
+    location: "Near Balajee Petrol Pump, Baliapur Road, Dhanbad, Jharkhand – 826007",
     developer: "Sai Sumbridhi Construction Pvt. Ltd.",
     positioning: "Luxury triplex villas in a prime Dhanbad location.",
-    shortDescription: "Sunny's One Address is an exclusive collection of luxury 4 BHK triplex villas near Balajee Petrol Pump on Dhanbad's 4 Lane Main Road. Designed for expansive family living, each home combines multiple bedrooms and bathrooms with dedicated office and servant spaces, private gardens, terrace areas and premium specifications.",
+    shortDescription: "Sunny's One Address is an exclusive collection of luxury 4 BHK triplex villas near Balajee Petrol Pump on Dhanbad's Baliapur Road. Designed for expansive family living, each home combines multiple bedrooms and bathrooms with dedicated office and servant spaces, private gardens, terrace areas and premium specifications.",
     status: "Under Construction",
     price: "₹1.5Cr onwards",
     images: [
@@ -172,6 +177,10 @@ export const PROJECTS: ProjectData[] = [
       { category: "Materials", details: ["ISI-branded reinforcement steel", "First-quality red bricks", "Ultratech cement", "Birla Putty", "High-quality exterior finish"] },
       { category: "Fittings", details: ["Jaguar / Kohler sanitary fittings", "Havells / Anchor / Kone electrical fittings"] },
       { category: "Security & Eco", details: ["24/7 CCTV surveillance", "Rainwater harvesting"] }
+    ],
+    floorPlanImages: [
+      "/images/sunnys-one-address/plans/floor-plan.png",
+      "/images/sunnys-one-address/plans/site-plan.png"
     ],
     _matchStats: {
       priceValue: 18500000,
@@ -251,6 +260,10 @@ export const PROJECTS: ProjectData[] = [
       { category: "Structure", details: ["Premium duplex construction", "3-level planning"] },
       { category: "Features", details: ["Dedicated parking", "Puja cabinet", "Utility space"] }
     ],
+    floorPlanImages: [
+      "/images/sunnys-urban-oasis/plans/floor-plan.png",
+      "/images/sunnys-urban-oasis/plans/site-plan.png"
+    ],
     _matchStats: {
       priceValue: 12500000,
       beds: 4,
@@ -316,6 +329,9 @@ export const PROJECTS: ProjectData[] = [
       { category: "Security", details: ["24/7 CCTV surveillance"] },
       { category: "Sustainability", details: ["Rainwater harvesting system"] },
     ],
+    floorPlanImages: [
+      "/images/sumbridhi-green-park/plans/site-plan.png"
+    ],
     _matchStats: {
       priceValue: 15500000,
       beds: 5,
@@ -376,6 +392,11 @@ export const PROJECTS: ProjectData[] = [
       { category: "Electrical", details: ["Concealed wiring", "Multi-strand fire-resistant copper wire", "Modular switches"] },
       { category: "Doors & Windows", details: ["WPC / folded MS steel-section frames with decorative shutters", "2-track UPVC sliding windows"] },
       { category: "Sanitary & Plumbing", details: ["Jaguar / CERA or equivalent sanitary fittings and CP taps"] }
+    ],
+    floorPlanImages: [
+      "/images/triveni-vatika/plans/first-floor-plan.png",
+      "/images/triveni-vatika/plans/ground-floor-plan.png",
+      "/images/triveni-vatika/plans/site-plan.png"
     ],
     _matchStats: {
       priceValue: 6900000,

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, Heart } from 'lucide-react';
+import { Menu, X, Heart, Calculator } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -67,6 +67,9 @@ export function Header() {
       </nav>
 
       <div className="hidden md:flex items-center gap-4">
+        <Link href="/services#emi-calculator" className="p-2 hover:text-primary transition-colors text-muted-foreground" aria-label="EMI Calculator">
+          <Calculator className="w-5 h-5" />
+        </Link>
         <Link href="/wishlist" className="p-2 hover:text-primary transition-colors text-muted-foreground" aria-label="Wishlist">
           <Heart className="w-5 h-5" />
         </Link>
@@ -81,6 +84,9 @@ export function Header() {
       </div>
 
       <div className="flex md:hidden items-center gap-4 z-50">
+        <Link href="/services#emi-calculator" className="text-foreground hover:text-primary transition-colors" aria-label="EMI Calculator">
+          <Calculator className="w-6 h-6 stroke-1" />
+        </Link>
         <Link href="/wishlist" className="text-foreground hover:text-primary transition-colors" aria-label="Wishlist">
           <Heart className="w-6 h-6 stroke-1" />
         </Link>

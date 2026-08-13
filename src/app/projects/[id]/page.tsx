@@ -4,14 +4,20 @@ import { MapPin, Info, CheckCircle2, Building2, Map, Shield, Layers, X, ChevronL
 import { Button } from "@/components/ui/button";
 import { motion, Variants } from "framer-motion";
 import { use, useState } from "react";
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import { PROJECTS } from "@/data/projects";
 
 export default function ProjectDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
+  const router = useRouter();
   
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [galleryTab, setGalleryTab] = useState<"photos" | "plans">("photos");
+
+  // Inquiry form state
+  const [inquiryForm, setInquiryForm] = useState({ name: "", phone: "", email: "" });
+  const [inquiryErrors, setInquiryErrors] = useState<Record<string, string>>({});
+  const [inquirySubmitted, setInquirySubmitted] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const project = PROJECTS.find(p => p.id === id);
@@ -38,12 +44,21 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
       
       {/* Image Gallery */}
       <motion.div 
-        className="max-w-7xl mx-auto px-4 md:px-8 mb-12"
+        className="max-w-7xl mx-auto px-4 md:px-8 mb-12 relative"
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
       >
-        <div className="flex md:grid md:grid-cols-3 gap-2 md:gap-4 h-[40vh] md:h-[60vh] overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-hide pb-2 md:pb-0">
+        <div className="flex md:grid md:grid-cols-3 gap-2 md:gap-4 h-[40vh] md:h-[60vh] min-h-[400px] overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-hide pb-2 md:pb-0 relative">
+          
+          {/* Floating Back Button */}
+          <button 
+            onClick={() => router.back()}
+            className="absolute top-4 left-4 z-20 bg-background/60 hover:bg-background/90 backdrop-blur-md text-foreground rounded-full px-4 py-2 flex items-center text-xs font-mono uppercase tracking-wider transition-all shadow-sm border border-white/20"
+          >
+            <ChevronLeft className="w-4 h-4 mr-1" /> Back
+          </button>
+
           <motion.div 
             variants={fadeInUp}
             className="flex-none w-[85vw] md:w-auto md:col-span-2 bg-muted bg-cover bg-center overflow-hidden relative group snap-center"
@@ -159,11 +174,28 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
           </section>
           
           {/* Floor Plans / Configurations */}
-          {(project.floorPlans || project.configurations) && (
+          {(project.floorPlans || project.configurations || (project.floorPlanImages && project.floorPlanImages.length > 0)) && (
             <section>
               <h2 className="text-lg sm:text-xl md:text-2xl font-light mb-4 md:mb-6 flex items-center">
                 <Layers className="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3 text-primary stroke-1" /> Floor Plans & Layouts
               </h2>
+
+              {project.floorPlanImages && project.floorPlanImages.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                  {project.floorPlanImages.map((img, idx) => (
+                    <div 
+                      key={idx} 
+                      className="border border-border p-4 bg-white/5 cursor-pointer group hover:border-primary/50 transition-colors"
+                      onClick={() => { setIsGalleryOpen(true); setGalleryTab("plans"); setCurrentImageIndex(idx); }}
+                    >
+                      <div className="aspect-[4/3] w-full relative overflow-hidden bg-white/10 rounded-sm">
+                        <img src={img} alt={`${project.name} Floor Plan ${idx + 1}`} className="absolute inset-0 w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
               <div className="grid grid-cols-2 gap-3 md:gap-6">
                 {project.floorPlans?.map((plan, idx) => (
                   <div key={idx} className="border border-border p-4 md:p-6 shadow-sm hover:border-primary/50 transition-colors">
@@ -224,6 +256,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                 allowFullScreen 
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
+                sandbox="allow-scripts allow-same-origin"
               ></iframe>
             </div>
           </section>
@@ -241,21 +274,64 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
             <h3 className="text-base sm:text-lg md:text-xl font-medium mb-1 md:mb-2">Interested in this property?</h3>
             <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground font-light mb-5 md:mb-8">Fill out the form below and our experts will get in touch with you shortly.</p>
             
-            <form className="space-y-6">
+            <form
+              noValidate
+              onSubmit={(e) => {
+                e.preventDefault();
+                const errs: Record<string, string> = {};
+                if (!inquiryForm.name.trim() || inquiryForm.name.trim().length < 2) errs.name = "Please enter your name";
+                const cleanPhone = inquiryForm.phone.replace(/[\s-]/g, "");
+                if (!cleanPhone || !/^[+]?[0-9]{10,13}$/.test(cleanPhone)) errs.phone = "Enter a valid 10-digit number";
+                if (inquiryForm.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inquiryForm.email)) errs.email = "Enter a valid email";
+                setInquiryErrors(errs);
+                if (Object.keys(errs).length === 0) {
+                  setInquirySubmitted(true);
+                  setInquiryForm({ name: "", phone: "", email: "" });
+                  setTimeout(() => setInquirySubmitted(false), 4000);
+                }
+              }}
+              className="space-y-6"
+            >
+              {inquirySubmitted && (
+                <div className="flex items-center gap-2 bg-green-900/20 border border-green-800/30 text-green-400 p-3 text-xs font-mono">
+                  <CheckCircle2 className="w-4 h-4 shrink-0" /> We&apos;ll call you back shortly!
+                </div>
+              )}
               <div className="group">
-                <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground block mb-2 group-focus-within:text-primary transition-colors">Full Name</label>
-                <input type="text" className="w-full bg-transparent border-b border-border pb-2 outline-none focus:border-primary transition-colors text-sm font-light" placeholder="John Doe" />
+                <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground block mb-2 group-focus-within:text-primary transition-colors">Full Name *</label>
+                <input
+                  type="text"
+                  className={`w-full bg-transparent border-b pb-2 outline-none transition-colors text-sm font-light ${inquiryErrors.name ? "border-red-500" : "border-border focus:border-primary"}`}
+                  placeholder="John Doe"
+                  value={inquiryForm.name}
+                  onChange={(e) => { setInquiryForm({ ...inquiryForm, name: e.target.value }); setInquiryErrors({ ...inquiryErrors, name: "" }); }}
+                />
+                {inquiryErrors.name && <p className="text-[10px] font-mono text-red-500 mt-1">{inquiryErrors.name}</p>}
               </div>
               <div className="group">
-                <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground block mb-2 group-focus-within:text-primary transition-colors">Phone Number</label>
-                <input type="tel" className="w-full bg-transparent border-b border-border pb-2 outline-none focus:border-primary transition-colors text-sm font-light" placeholder="+91 6203819040" />
+                <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground block mb-2 group-focus-within:text-primary transition-colors">Mobile Number *</label>
+                <input
+                  type="tel"
+                  className={`w-full bg-transparent border-b pb-2 outline-none transition-colors text-sm font-light ${inquiryErrors.phone ? "border-red-500" : "border-border focus:border-primary"}`}
+                  placeholder="+91 6203819040"
+                  value={inquiryForm.phone}
+                  onChange={(e) => { setInquiryForm({ ...inquiryForm, phone: e.target.value }); setInquiryErrors({ ...inquiryErrors, phone: "" }); }}
+                />
+                {inquiryErrors.phone && <p className="text-[10px] font-mono text-red-500 mt-1">{inquiryErrors.phone}</p>}
               </div>
               <div className="group">
                 <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground block mb-2 group-focus-within:text-primary transition-colors">Email Address (Optional)</label>
-                <input type="email" className="w-full bg-transparent border-b border-border pb-2 outline-none focus:border-primary transition-colors text-sm font-light" placeholder="john@example.com" />
+                <input
+                  type="email"
+                  className={`w-full bg-transparent border-b pb-2 outline-none transition-colors text-sm font-light ${inquiryErrors.email ? "border-red-500" : "border-border focus:border-primary"}`}
+                  placeholder="john@example.com"
+                  value={inquiryForm.email}
+                  onChange={(e) => { setInquiryForm({ ...inquiryForm, email: e.target.value }); setInquiryErrors({ ...inquiryErrors, email: "" }); }}
+                />
+                {inquiryErrors.email && <p className="text-[10px] font-mono text-red-500 mt-1">{inquiryErrors.email}</p>}
               </div>
               
-              <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-none py-6 uppercase tracking-widest font-medium text-xs transition-transform hover:scale-[1.02] shadow-[0_0_20px_rgba(193,95,53,0.25)]">
+              <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-none py-6 uppercase tracking-widest font-medium text-xs transition-transform hover:scale-[1.02] shadow-[0_0_20px_rgba(193,95,53,0.25)]">
                 Request Callback
               </Button>
             </form>

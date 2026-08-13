@@ -3,6 +3,7 @@ import { Work_Sans, Fraunces, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { LocationProvider } from "@/context/LocationContext";
 
 const workSans = Work_Sans({
   variable: "--font-body",
@@ -41,11 +42,13 @@ export default function RootLayout({
         <div className="fixed inset-0 z-[-2] blueprint-grid" />
         <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_at_top,rgba(193,95,53,0.06),transparent_60%)]" />
 
-        <Header />
-        <main className="flex-1 z-0">
-          {children}
-        </main>
-        <Footer />
+        <LocationProvider>
+          <Header />
+          <main className="flex-1 z-0">
+            {children}
+          </main>
+          <Footer />
+        </LocationProvider>
       </body>
     </html>
   );

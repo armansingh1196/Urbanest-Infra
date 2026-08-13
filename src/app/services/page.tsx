@@ -1,5 +1,6 @@
 import { ScaleDivider } from "@/components/layout/ScaleDivider";
-import { Compass, Landmark, FileCheck2, Home, Users, KeyRound } from "lucide-react";
+import { Compass, Landmark, FileCheck2, Home, Users, KeyRound, Calculator } from "lucide-react";
+import EMICalculator from "@/components/tools/EMICalculator";
 
 const SERVICES = [
   {
@@ -63,6 +64,22 @@ export default function ServicesPage() {
             <p className="text-xs sm:text-sm text-muted-foreground font-light leading-relaxed">{desc}</p>
           </div>
         ))}
+      </div>
+
+      {/* EMI Calculator Section */}
+      <div id="emi-calculator" className="mt-24 scroll-mt-32">
+        <div className="mb-12">
+          <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-primary flex items-center gap-2">
+            <Calculator className="w-3.5 h-3.5" /> Financial Tools
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif tracking-wide mt-3 mb-4">EMI Calculator</h2>
+          <p className="text-muted-foreground font-light text-sm md:text-base leading-relaxed max-w-xl">
+            Estimate your monthly home loan payments. Adjust the sliders to match your budget and see the breakdown instantly.
+          </p>
+        </div>
+        <div className="bg-card border border-border p-6 md:p-10 plan-corners shadow-lg">
+          <EMICalculator compact={true} />
+        </div>
       </div>
 
       <div className="mt-24">

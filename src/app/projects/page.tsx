@@ -4,7 +4,8 @@ import { ProjectCard } from "@/components/projects/ProjectCard";
 import { Filter, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, Variants } from "framer-motion";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useLocation } from "@/context/LocationContext";
 
 import { PROJECTS } from "@/data/projects";
 
@@ -23,6 +24,50 @@ const fadeInUp: Variants = {
 
 export default function ProjectsPage() {
   const [showFilters, setShowFilters] = useState(false);
+  const { stateName, districts, isLoading } = useLocation();
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [selectedDistricts, setSelectedDistricts] = useState<string[]>([]);
+
+  const toggleSelection = (setter: React.Dispatch<React.SetStateAction<string[]>>, value: string) => {
+    setter(prev => prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]);
+  };
+
+  const getPropertyType = (project: typeof PROJECTS[0]) => {
+    const t = project.type.toLowerCase();
+    const c = project.config.toLowerCase();
+    if (t.includes("commercial") || c.includes("commercial")) return "Commercial";
+    if (t.includes("triplex") || c.includes("triplex")) return "Triplex";
+    if (t.includes("duplex") || c.includes("duplex")) return "Duplex";
+    return "Residential";
+  };
+
+  const filteredProjects = useMemo(() => {
+    return PROJECTS.filter(project => {
+      if (selectedTypes.length > 0 && !selectedTypes.includes(getPropertyType(project))) return false;
+      
+      if (selectedDistricts.length > 0) {
+        const pLoc = project.location.toLowerCase();
+        const isMatch = selectedDistricts.some(d => {
+          // Extract the core area name from "Dhanbad - Area (Pincode)"
+          let searchArea = d.toLowerCase();
+          if (d.includes(' - ')) {
+            searchArea = searchArea.split(' - ')[1];
+            if (searchArea.includes(' (')) {
+              searchArea = searchArea.split(' (')[0];
+            }
+          }
+          return pLoc.includes(searchArea.trim());
+        });
+        if (!isMatch) return false;
+      }
+      return true;
+    });
+  }, [selectedTypes, selectedDistricts]);
+
+  const clearFilters = () => {
+    setSelectedTypes([]);
+    setSelectedDistricts([]);
+  };
 
   return (
     <div className="pt-24 min-h-screen">
@@ -64,15 +109,46 @@ export default function ProjectsPage() {
               <h3 className="uppercase tracking-wider font-medium text-sm flex items-center">
                 <Filter className="w-4 h-4 mr-2" /> Filters
               </h3>
-              <span className="text-xs text-muted-foreground cursor-pointer hover:text-primary transition-colors">Clear</span>
+              <span onClick={clearFilters} className="text-xs text-muted-foreground cursor-pointer hover:text-primary transition-colors">Clear</span>
             </div>
 
             <div className="space-y-4 mb-8">
               <h4 className="text-sm font-medium tracking-wide uppercase text-muted-foreground">Property Type</h4>
               <div className="space-y-3 text-sm font-light">
-                <label className="flex items-center gap-3 cursor-pointer group"><input type="checkbox" className="accent-primary w-4 h-4" /> <span className="group-hover:text-primary transition-colors">Residential</span></label>
-                <label className="flex items-center gap-3 cursor-pointer group"><input type="checkbox" className="accent-primary w-4 h-4" /> <span className="group-hover:text-primary transition-colors">Commercial</span></label>
-                <label className="flex items-center gap-3 cursor-pointer group"><input type="checkbox" className="accent-primary w-4 h-4" /> <span className="group-hover:text-primary transition-colors">Luxury</span></label>
+                {["Duplex", "Triplex", "Commercial", "Residential"].map(type => (
+                  <label key={type} className="flex items-center gap-3 cursor-pointer group">
+                    <input 
+                      type="checkbox" 
+                      className="accent-primary w-4 h-4" 
+                      checked={selectedTypes.includes(type)}
+                      onChange={() => toggleSelection(setSelectedTypes, type)}
+                    /> 
+                    <span className="group-hover:text-primary transition-colors">{type}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-4 mb-8">
+              <h4 className="text-sm font-medium tracking-wide uppercase text-muted-foreground flex items-center justify-between">
+                Location ({stateName})
+                {isLoading && <span className="text-[10px] animate-pulse">Loading...</span>}
+              </h4>
+              <div className="space-y-3 text-sm font-light max-h-64 overflow-y-auto pr-2 custom-scrollbar">
+                {districts.map(district => (
+                  <label key={district} className="flex items-center gap-3 cursor-pointer group">
+                    <input 
+                      type="checkbox" 
+                      className="accent-primary w-4 h-4"
+                      checked={selectedDistricts.includes(district)}
+                      onChange={() => toggleSelection(setSelectedDistricts, district)}
+                    /> 
+                    <span className="group-hover:text-primary transition-colors leading-tight">{district}</span>
+                  </label>
+                ))}
+                {!isLoading && districts.length === 0 && (
+                  <p className="text-xs text-muted-foreground italic">No districts available.</p>
+                )}
               </div>
             </div>
 
@@ -109,7 +185,7 @@ export default function ProjectsPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <p className="text-xs sm:text-sm text-muted-foreground font-light">Showing {PROJECTS.length} properties</p>
+            <p className="text-xs sm:text-sm text-muted-foreground font-light">Showing {filteredProjects.length} properties</p>
             <div className="flex items-center gap-2 text-xs sm:text-sm font-light">
                <SlidersHorizontal className="w-4 h-4 text-muted-foreground" />
                <select className="bg-transparent outline-none border-none cursor-pointer hover:text-primary transition-colors">
@@ -127,20 +203,26 @@ export default function ProjectsPage() {
             initial="hidden"
             animate="visible"
           >
-            {PROJECTS.map(project => (
-              <motion.div key={project.id} variants={fadeInUp}>
-                <ProjectCard 
-                  id={project.id}
-                  name={project.name}
-                  developer={project.developer}
-                  location={project.location}
-                  price={project.price}
-                  imageUrl={project.images[0]}
-                  type={project.type.includes("Commercial") ? "Commercial" : project.type.includes("Luxury") ? "Luxury" : "Residential"}
-                  status={project.status}
-                />
-              </motion.div>
-            ))}
+            {filteredProjects.length === 0 ? (
+              <div className="col-span-full py-12 text-center text-muted-foreground font-light">
+                No properties match your current filters. Try clearing some selections.
+              </div>
+            ) : (
+              filteredProjects.map(project => (
+                <motion.div key={project.id} variants={fadeInUp}>
+                  <ProjectCard 
+                    id={project.id}
+                    name={project.name}
+                    developer={project.developer}
+                    location={project.location}
+                    price={project.price}
+                    imageUrl={project.images[0]}
+                    type={getPropertyType(project)}
+                    status={project.status}
+                  />
+                </motion.div>
+              ))
+            )}
           </motion.div>
         </div>
       </div>

@@ -23,9 +23,13 @@ export default function WishlistPage() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("urbanest_wishlist");
-    if (saved) {
-      setWishlist(JSON.parse(saved));
+    try {
+      const saved = localStorage.getItem("urbanest_wishlist");
+      if (saved) {
+        setWishlist(JSON.parse(saved));
+      }
+    } catch {
+      localStorage.removeItem("urbanest_wishlist");
     }
     setMounted(true);
   }, []);

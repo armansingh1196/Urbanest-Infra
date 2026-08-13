@@ -20,8 +20,8 @@ export default function AboutPage() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 md:px-8 mb-12 md:mb-24">
-        <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-2 md:gap-4 h-[40vh] md:h-[600px]">
-          <div className="col-span-2 row-span-2 relative overflow-hidden border border-border plan-corners group">
+        <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-3 md:grid-rows-2 gap-2 md:gap-4 h-[70vh] md:h-[600px]">
+          <div className="col-span-2 row-span-1 md:row-span-2 relative overflow-hidden border border-border plan-corners group">
             <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
             <img src="/images/sunnys-one-address/sunnys-one-address-1.png" alt="Luxury Villa" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
           </div>

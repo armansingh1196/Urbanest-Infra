@@ -213,4 +213,49 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* EMI Calculator slider */
+  .emi-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: var(--border);
+    outline: none;
+    cursor: pointer;
+  }
+  .emi-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border: 3px solid var(--background);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--primary), 0 2px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .emi-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 2px var(--primary), 0 4px 12px rgba(193, 95, 53, 0.3);
+  }
+  .emi-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border: 3px solid var(--background);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--primary), 0 2px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .emi-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 2px var(--primary), 0 4px 12px rgba(193, 95, 53, 0.3);
+  }
+  .emi-slider::-moz-range-track {
+    height: 4px;
+    background: var(--border);
+    border: none;
+  }
 }
