@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { PropertyMatcher } from "@/components/projects/PropertyMatcher";
 import { ScaleDivider } from "@/components/layout/ScaleDivider";
+import { ProcessStepper } from "@/components/layout/ProcessStepper";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { useRef } from "react";
 
@@ -49,7 +50,7 @@ export default function HomePage() {
           variants={staggerContainer}
         >
           <motion.span variants={fadeInUp} className="font-mono text-xs uppercase tracking-[0.3em] text-primary mb-6">
-            Channel Partner — Across India
+            Premium Real Estate Advisory
           </motion.span>
           <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-7xl font-serif text-foreground tracking-wide leading-[1.05] mb-4 md:mb-6 max-w-4xl">
             Every good build starts with a proper survey.
@@ -96,73 +97,13 @@ export default function HomePage() {
         <PropertyMatcher />
       </motion.section>
 
-      {/* Search Section */}
-      <motion.section
-        className="relative z-20 mt-8 md:-mt-16 px-4 md:px-8 max-w-6xl mx-auto w-full"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-      >
-        <div className="bg-card/95 backdrop-blur-xl shadow-2xl p-4 md:p-8 border border-border rounded-none flex flex-col md:flex-row items-center gap-4 md:gap-6">
-          <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 divide-y md:divide-y-0 md:divide-x divide-border">
-            <div className="space-y-1 md:px-6 first:pl-0">
-              <label className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Location</label>
-              <div className="flex items-center group">
-                <MapPin className="w-4 h-4 text-primary mr-3 group-hover:scale-110 transition-transform" />
-                <select className="bg-transparent w-full outline-none text-sm font-serif tracking-wide text-foreground appearance-none cursor-pointer truncate pr-4">
-                  <option>All Locations</option>
-                  {Array.from(new Set(PROJECTS.map(p => p.location))).map((loc) => (
-                    <option key={loc} value={loc} className="truncate">{loc}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
 
-            <div className="space-y-1 pt-3 md:pt-0 md:px-6">
-              <label className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Property Type</label>
-              <div className="flex items-center group">
-                <Home className="w-4 h-4 text-primary mr-3 group-hover:scale-110 transition-transform" />
-                <select className="bg-transparent w-full outline-none text-sm font-serif tracking-wide text-foreground appearance-none cursor-pointer">
-                  <option>Any Type</option>
-                  <option>Residential</option>
-                  <option>Commercial</option>
-                  <option>Luxury</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="space-y-1 pt-3 md:pt-0 md:px-6">
-              <label className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Budget</label>
-              <div className="flex items-center group">
-                <span className="text-primary font-medium mr-3 group-hover:scale-110 transition-transform">₹</span>
-                <select className="bg-transparent w-full outline-none text-sm font-serif tracking-wide text-foreground appearance-none cursor-pointer">
-                  <option>Any Budget</option>
-                  <option>Under 50L</option>
-                  <option>50L - 1Cr</option>
-                  <option>1Cr +</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <Link href="/projects" tabIndex={-1} className="w-full md:w-auto">
-            <Button className="w-full h-full min-h-[48px] md:min-h-full px-6 py-5 md:px-10 md:py-7 bg-primary text-primary-foreground hover:bg-primary/90 rounded-none uppercase tracking-widest font-mono text-[10px] md:text-xs transition-transform hover:-translate-y-0.5 flex-shrink-0">
-              Search
-              <Search className="w-4 h-4 ml-2 md:ml-3" />
-            </Button>
-          </Link>
-        </div>
-      </motion.section>
 
       {/* Featured Projects */}
-      <motion.section
-        className="py-16 md:py-32 px-4 md:px-16 max-w-7xl mx-auto w-full"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
+      <section
+        className="pb-16 pt-8 md:pb-32 md:pt-16 px-4 md:px-16 max-w-7xl mx-auto w-full"
       >
-        <motion.div variants={fadeInUp} className="flex justify-between items-end mb-16 flex-wrap gap-6">
+        <div className="flex justify-between items-end mb-16 flex-wrap gap-6">
           <div>
             <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">Chapter 03 — Portfolio</span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif tracking-wide mt-3 mb-4">Featured projects</h2>
@@ -173,11 +114,11 @@ export default function HomePage() {
           <Link href="/projects" className="font-mono text-xs uppercase tracking-widest text-primary hover:underline underline-offset-4 shrink-0">
             View all projects →
           </Link>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {PROJECTS.slice(0, 3).map((project, i) => (
-            <motion.div key={project.id} variants={fadeInUp}>
+            <div key={project.id}>
               <ProjectCard
                 id={project.id}
                 name={project.name}
@@ -188,10 +129,10 @@ export default function HomePage() {
                 type={project.type.includes("Commercial") ? "Commercial" : project.type.includes("Luxury") ? "Luxury" : "Residential"}
                 status={project.status}
               />
-            </motion.div>
+            </div>
           ))}
         </div>
-      </motion.section>
+      </section>
 
       <div className="max-w-7xl mx-auto w-full px-4 md:px-16">
         <ScaleDivider label="N 24.47° / E 86.98°" className="text-muted-foreground" />
@@ -253,28 +194,12 @@ export default function HomePage() {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 relative"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={staggerContainer}
+          variants={fadeInUp}
         >
-          <div className="hidden md:block absolute top-12 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent z-0 opacity-70" />
-
-          {[
-            { step: '01', title: 'Discovery', desc: 'Understand your requirements and budget.' },
-            { step: '02', title: 'Site Visits', desc: 'Guided tours of shortlisted properties.' },
-            { step: '03', title: 'Negotiation', desc: 'Getting you the best price and terms.' },
-            { step: '04', title: 'Closure', desc: 'Documentation and loan assistance.' }
-          ].map((item, i) => (
-            <motion.div key={i} variants={fadeInUp} className="relative z-10 flex flex-col items-center text-center group cursor-default">
-              <div className="w-12 h-12 md:w-20 md:h-20 rounded-full bg-background border border-border flex items-center justify-center text-base md:text-xl font-mono text-primary mb-2 md:mb-6 transition-all duration-500 group-hover:scale-110 group-hover:border-primary/50">
-                {item.step}
-              </div>
-              <h4 className="text-base sm:text-xl font-medium font-serif mb-1 md:mb-2">{item.title}</h4>
-              <p className="text-[10px] sm:text-sm text-muted-foreground font-light leading-relaxed max-w-[200px]">{item.desc}</p>
-            </motion.div>
-          ))}
+          <ProcessStepper />
         </motion.div>
       </section>
 

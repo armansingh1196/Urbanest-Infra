@@ -31,10 +31,8 @@ export function Footer() {
             <Link href="#" className="hover:text-primary transition-colors" aria-label="Facebook">
               <FacebookIcon className="w-4 h-4 md:w-5 md:h-5" />
             </Link>
-            <Link href="#" className="hover:text-primary transition-colors" aria-label="Twitter">
-              <TwitterIcon className="w-4 h-4 md:w-5 md:h-5" />
-            </Link>
-            <Link href="#" className="hover:text-primary transition-colors" aria-label="Instagram">
+
+            <Link href="https://www.instagram.com/urbanestinfra?igsh=d3NjZGpjenh2MjFl" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" aria-label="Instagram">
               <InstagramIcon className="w-4 h-4 md:w-5 md:h-5" />
             </Link>
             <Link href="#" className="hover:text-primary transition-colors" aria-label="LinkedIn">
