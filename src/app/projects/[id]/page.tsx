@@ -188,7 +188,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                       className="border border-border p-4 bg-white/5 cursor-pointer group hover:border-primary/50 transition-colors"
                       onClick={() => { setIsGalleryOpen(true); setGalleryTab("plans"); setCurrentImageIndex(idx); }}
                     >
-                      <div className="aspect-[4/3] w-full relative overflow-hidden bg-white/10 rounded-sm">
+                      <div className="pt-[75%] w-full relative overflow-hidden bg-white/10 rounded-sm">
                         <img src={img} alt={`${project.name} Floor Plan ${idx + 1}`} className="absolute inset-0 w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105" />
                       </div>
                     </div>
