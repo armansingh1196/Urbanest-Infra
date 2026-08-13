@@ -109,10 +109,11 @@ export default function HomePage() {
               <label className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Location</label>
               <div className="flex items-center group">
                 <MapPin className="w-4 h-4 text-primary mr-3 group-hover:scale-110 transition-transform" />
-                <select className="bg-transparent w-full outline-none text-sm font-serif tracking-wide text-foreground appearance-none cursor-pointer">
+                <select className="bg-transparent w-full outline-none text-sm font-serif tracking-wide text-foreground appearance-none cursor-pointer truncate pr-4">
                   <option>All Locations</option>
-                  <option>Metropolitan Areas</option>
-                  <option>Saraidhela</option>
+                  {Array.from(new Set(PROJECTS.map(p => p.location))).map((loc) => (
+                    <option key={loc} value={loc} className="truncate">{loc}</option>
+                  ))}
                 </select>
               </div>
             </div>
