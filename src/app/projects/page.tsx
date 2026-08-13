@@ -27,6 +27,8 @@ export default function ProjectsPage() {
   const { stateName, districts, isLoading } = useLocation();
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedDistricts, setSelectedDistricts] = useState<string[]>([]);
+  const [selectedBudget, setSelectedBudget] = useState<string>("Any");
+  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
 
   const toggleSelection = (setter: React.Dispatch<React.SetStateAction<string[]>>, value: string) => {
     setter(prev => prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]);
@@ -43,12 +45,13 @@ export default function ProjectsPage() {
 
   const filteredProjects = useMemo(() => {
     return PROJECTS.filter(project => {
+      // Type Filter
       if (selectedTypes.length > 0 && !selectedTypes.includes(getPropertyType(project))) return false;
       
+      // Location Filter
       if (selectedDistricts.length > 0) {
         const pLoc = project.location.toLowerCase();
         const isMatch = selectedDistricts.some(d => {
-          // Extract the core area name from "Dhanbad - Area (Pincode)"
           let searchArea = d.toLowerCase();
           if (d.includes(' - ')) {
             searchArea = searchArea.split(' - ')[1];
@@ -60,13 +63,27 @@ export default function ProjectsPage() {
         });
         if (!isMatch) return false;
       }
+
+      // Budget Filter
+      if (selectedBudget !== "Any") {
+        const price = project._matchStats.priceValue;
+        if (selectedBudget === "Under ₹ 50 Lakhs" && price >= 5000000) return false;
+        if (selectedBudget === "₹ 50 Lakhs - 1 Crore" && (price < 5000000 || price > 10000000)) return false;
+        if (selectedBudget === "₹ 1 Crore +" && price <= 10000000) return false;
+      }
+
+      // Status Filter
+      if (selectedStatuses.length > 0 && !selectedStatuses.includes(project.status)) return false;
+
       return true;
     });
-  }, [selectedTypes, selectedDistricts]);
+  }, [selectedTypes, selectedDistricts, selectedBudget, selectedStatuses]);
 
   const clearFilters = () => {
     setSelectedTypes([]);
     setSelectedDistricts([]);
+    setSelectedBudget("Any");
+    setSelectedStatuses([]);
   };
 
   return (
@@ -155,23 +172,42 @@ export default function ProjectsPage() {
             <div className="space-y-4 mb-8">
               <h4 className="text-sm font-medium tracking-wide uppercase text-muted-foreground">Budget</h4>
               <div className="space-y-3 text-sm font-light">
-                <label className="flex items-center gap-3 cursor-pointer group"><input type="radio" name="budget" className="accent-primary w-4 h-4" /> <span className="group-hover:text-primary transition-colors">Any</span></label>
-                <label className="flex items-center gap-3 cursor-pointer group"><input type="radio" name="budget" className="accent-primary w-4 h-4" /> <span className="group-hover:text-primary transition-colors">Under ₹ 50 Lakhs</span></label>
-                <label className="flex items-center gap-3 cursor-pointer group"><input type="radio" name="budget" className="accent-primary w-4 h-4" /> <span className="group-hover:text-primary transition-colors">₹ 50 Lakhs - 1 Crore</span></label>
-                <label className="flex items-center gap-3 cursor-pointer group"><input type="radio" name="budget" className="accent-primary w-4 h-4" /> <span className="group-hover:text-primary transition-colors">₹ 1 Crore +</span></label>
+                {["Any", "Under ₹ 50 Lakhs", "₹ 50 Lakhs - 1 Crore", "₹ 1 Crore +"].map(budget => (
+                  <label key={budget} className="flex items-center gap-3 cursor-pointer group" onClick={(e) => { e.preventDefault(); setSelectedBudget(budget); }}>
+                    <input 
+                      type="radio" 
+                      name="budget" 
+                      className="accent-primary w-4 h-4 cursor-pointer" 
+                      checked={selectedBudget === budget}
+                      readOnly
+                    /> 
+                    <span className="group-hover:text-primary transition-colors">{budget}</span>
+                  </label>
+                ))}
               </div>
             </div>
 
             <div className="space-y-4 mb-8">
               <h4 className="text-sm font-medium tracking-wide uppercase text-muted-foreground">Status</h4>
               <div className="space-y-3 text-sm font-light">
-                <label className="flex items-center gap-3 cursor-pointer group"><input type="checkbox" className="accent-primary w-4 h-4" /> <span className="group-hover:text-primary transition-colors">Ready to Move</span></label>
-                <label className="flex items-center gap-3 cursor-pointer group"><input type="checkbox" className="accent-primary w-4 h-4" /> <span className="group-hover:text-primary transition-colors">Under Construction</span></label>
-                <label className="flex items-center gap-3 cursor-pointer group"><input type="checkbox" className="accent-primary w-4 h-4" /> <span className="group-hover:text-primary transition-colors">New Launch</span></label>
+                {["Ready to Move", "Under Construction", "New Launch"].map(status => (
+                  <label key={status} className="flex items-center gap-3 cursor-pointer group" onClick={(e) => { e.preventDefault(); toggleSelection(setSelectedStatuses, status); }}>
+                    <input 
+                      type="checkbox" 
+                      className="accent-primary w-4 h-4 cursor-pointer" 
+                      checked={selectedStatuses.includes(status)}
+                      readOnly
+                    /> 
+                    <span className="group-hover:text-primary transition-colors">{status}</span>
+                  </label>
+                ))}
               </div>
             </div>
 
-            <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-none py-6 uppercase tracking-widest font-medium text-xs transition-transform hover:scale-[1.02]">
+            <Button 
+              onClick={() => setShowFilters(false)}
+              className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-none py-6 uppercase tracking-widest font-medium text-xs transition-transform hover:scale-[1.02]"
+            >
               Apply Filters
             </Button>
           </div>
