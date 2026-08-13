@@ -56,11 +56,15 @@ export const PROJECTS: ProjectData[] = [
     positioning: "Luxury residential apartments combining classic British Colonial architecture with modern amenities.",
     shortDescription: "Sunny's 86° East is a premium residential development in Kailashpuram, Dhanbad, offering thoughtfully designed 2 & 3 BHK apartments in a distinctive British Colonial architectural style. With spacious layouts, high ceilings, abundant natural light and world-class amenities, the project brings together classic elegance, modern comfort and sustainable living.",
     status: "New Launch",
-    price: "Price on Request",
+    price: "₹4,000 per Sq. Ft. onwards",
     images: [
-      "/images/project-emerald-heights.jpeg", // Placeholder
-      "/images/gallery-01.jpeg",
-      "/images/gallery-02.jpeg",
+      "/images/sunnys-86-east/sunnys-86-east-1.jpeg",
+      "/images/sunnys-86-east/sunnys-86-east-2.jpeg",
+      "/images/sunnys-86-east/sunnys-86-east-3.jpeg",
+      "/images/sunnys-86-east/sunnys-86-east-4.jpeg",
+      "/images/sunnys-86-east/sunnys-86-east-5.jpeg",
+      "/images/sunnys-86-east/sunnys-86-east-6.jpeg",
+      "/images/sunnys-86-east/sunnys-86-east-7.jpeg"
     ],
     highlights: [
       "British Colonial-style architecture",
@@ -123,11 +127,14 @@ export const PROJECTS: ProjectData[] = [
     positioning: "Luxury triplex villas in a prime Dhanbad location.",
     shortDescription: "Sunny's One Address is an exclusive collection of luxury 4 BHK triplex villas near Balajee Petrol Pump on Dhanbad's 4 Lane Main Road. Designed for expansive family living, each home combines multiple bedrooms and bathrooms with dedicated office and servant spaces, private gardens, terrace areas and premium specifications.",
     status: "Under Construction",
-    price: "Price on Request",
+    price: "₹1.5Cr onwards",
     images: [
-      "/images/project-imperial.jpeg", // Placeholder
-      "/images/gallery-03.jpeg",
-      "/images/about-01.jpeg",
+      "/images/sunnys-one-address/sunnys-one-address-1.png",
+      "/images/sunnys-one-address/sunnys-one-address-2.png",
+      "/images/sunnys-one-address/sunnys-one-address-3.png",
+      "/images/sunnys-one-address/sunnys-one-address-4.png",
+      "/images/sunnys-one-address/sunnys-one-address-5.png",
+      "/images/sunnys-one-address/sunnys-one-address-6.png"
     ],
     highlights: [
       "4 Bedrooms",
@@ -185,11 +192,24 @@ export const PROJECTS: ProjectData[] = [
     positioning: "A world of luxury living / Where elegance meets comfort",
     shortDescription: "Sunny's Urban Oasis is an ultra-premium 4 BHK duplex development at Kusum Vihar, Dhanbad, designed around spacious family living and contemporary luxury. With generous floor plans, private terrace gardens, dedicated parking and a thoughtfully planned residential environment, the project brings elegance and comfort together in a premium community setting.",
     status: "Ready to Move",
-    price: "Price on Request",
+    price: "₹80L onwards",
     images: [
-      "/images/project-aura-commercial.jpeg", // Placeholder
-      "/images/gallery-02.jpeg",
-      "/images/about-02.jpeg",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-1.png",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-2.png",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-3.png",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-4.jpeg",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-5.jpeg",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-6.jpeg",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-7.jpeg",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-8.jpeg",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-9.jpeg",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-10.jpeg",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-11.jpeg",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-12.jpeg",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-13.jpeg",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-14.jpeg",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-15.jpeg",
+      "/images/sunnys-urban-oasis/sunnys-urban-oasis-16.jpeg"
     ],
     highlights: [
       "4 BHK",
@@ -250,11 +270,18 @@ export const PROJECTS: ProjectData[] = [
     positioning: "Exclusive collection of luxury 4.5 BHK triplex villas.",
     shortDescription: "Sumbridhi Green Park is an exclusive residential community of luxury 4.5 BHK triplex villas, offering approximately 3,128 sq.ft. of super built-up space. Designed for spacious family living, each villa features 3-car parking, attached dress rooms, servant quarters, terrace gardens, a double-height drawing area and premium finishes, complemented by a gated community and extensive lifestyle amenities.",
     status: "Under Construction",
-    price: "Price on Request",
+    price: "₹1.5Cr onwards",
     images: [
-      "/images/project-green-valley.jpeg", // Placeholder
-      "/images/gallery-01.jpeg",
-      "/images/gallery-03.jpeg",
+      "/images/sumbridhi-green-park/sumbridhi-green-park-1.PNG",
+      "/images/sumbridhi-green-park/sumbridhi-green-park-2.PNG",
+      "/images/sumbridhi-green-park/sumbridhi-green-park-3.PNG",
+      "/images/sumbridhi-green-park/sumbridhi-green-park-4.PNG",
+      "/images/sumbridhi-green-park/sumbridhi-green-park-5.PNG",
+      "/images/sumbridhi-green-park/sumbridhi-green-park-6.PNG",
+      "/images/sumbridhi-green-park/sumbridhi-green-park-7.PNG",
+      "/images/sumbridhi-green-park/sumbridhi-green-park-8.PNG",
+      "/images/sumbridhi-green-park/sumbridhi-green-park-9.PNG",
+      "/images/sumbridhi-green-park/sumbridhi-green-park-10.jpeg"
     ],
     highlights: [
       "4.5 BHK configuration",
@@ -295,6 +322,67 @@ export const PROJECTS: ProjectData[] = [
       baths: 4,
       sqft: 3128,
       tag: "Luxury Triplex"
+    }
+  },
+  {
+    id: "triveni-vatika",
+    name: "Triveni Vatika",
+    type: "4 BHK Duplex Homes",
+    config: "4 BHK",
+    area: "2,070 sq.ft.",
+    location: "New Karmik Nagar, Near Delhi Public School, Dhanbad",
+    developer: "Sai Sumbridhi Construction Pvt. Ltd.",
+    positioning: "A gated duplex community designed around contemporary architecture, spacious family living and lush green surroundings.",
+    shortDescription: "Triveni Vatika is a gated community of spacious 4 BHK duplex homes in New Karmik Nagar, Dhanbad. Designed with contemporary architecture, generous living spaces and landscaped green surroundings, the project brings modern family living into a peaceful residential setting.",
+    status: "New Launch",
+    price: "₹69L onwards",
+    images: [
+      "/images/triveni-vatika/triveni-vatika-1.png",
+      "/images/triveni-vatika/triveni-vatika-2.png",
+      "/images/triveni-vatika/triveni-vatika-3.png",
+      "/images/triveni-vatika/triveni-vatika-4.png",
+      "/images/triveni-vatika/triveni-vatika-5.png"
+    ],
+    highlights: [
+      "4 Bedrooms",
+      "3 Bathrooms",
+      "Spacious kitchen",
+      "1 dedicated parking space",
+      "Approx. 2,070 sq.ft.",
+      "Duplex configuration",
+      "Private green areas",
+      "Balcony",
+      "Terrace",
+      "Puja cabinet",
+      "Utility area"
+    ],
+    amenities: [
+      "Gated residential community",
+      "Landscaped front gardens",
+      "Modern exterior lighting",
+      "Individual vehicle parking",
+      "Green surroundings",
+      "500 W backup for 3/4 BHK",
+      "Common-area power backup"
+    ],
+    floorPlans: [
+      { level: "Ground Floor", area: "875 sq.ft.", features: ["Bedroom", "Kitchen", "Toilet", "Drawing-cum-Dining", "Parking", "Green Area", "Puja Cabinet", "Utility area", "Staircase"] },
+      { level: "First Floor", area: "995 sq.ft.", features: ["3 Bedrooms", "Family Lounge", "2 Toilets", "Balcony", "Terrace", "Staircase"] }
+    ],
+    specifications: [
+      { category: "Structure", details: ["Earthquake-resistant RCC frame structure", "9-inch external walls", "4½-inch internal walls"] },
+      { category: "Wall Finish", details: ["Internal walls: putty + distemper", "External walls: acrylic emulsion paint"] },
+      { category: "Flooring", details: ["Vitrified tiles up to 2' × 2' in rooms and kitchen", "Staircase: marble / tile flooring", "Toilets: anti-skid ceramic floor tiles"] },
+      { category: "Electrical", details: ["Concealed wiring", "Multi-strand fire-resistant copper wire", "Modular switches"] },
+      { category: "Doors & Windows", details: ["WPC / folded MS steel-section frames with decorative shutters", "2-track UPVC sliding windows"] },
+      { category: "Sanitary & Plumbing", details: ["Jaguar / CERA or equivalent sanitary fittings and CP taps"] }
+    ],
+    _matchStats: {
+      priceValue: 6900000,
+      beds: 4,
+      baths: 3,
+      sqft: 2070,
+      tag: "Duplex Community"
     }
   }
 ];

@@ -135,15 +135,20 @@ function SwipeCard({
         }}
       >
         {/* Image */}
-        <div className="relative h-[62%] w-full overflow-hidden">
+        <div className="relative h-[62%] w-full overflow-hidden bg-black/5 dark:bg-white/5">
+          {/* Blurred backdrop to fill the canvas */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-40 scale-110 blur-xl"
+            style={{ backgroundImage: `url('${property.image}')` }}
+          />
           <img
             src={property.image}
             alt={property.title}
             draggable={false}
-            className="h-full w-full object-cover"
+            className="relative z-10 h-full w-full object-contain p-2"
           />
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 z-20 pointer-events-none"
             style={{
               background:
                 "linear-gradient(180deg, rgba(248,245,240,0) 55%, rgba(248,245,240,0.95) 100%)",
@@ -152,7 +157,7 @@ function SwipeCard({
 
           {/* Lot number — real ordering in the deck, not decoration */}
           <div
-            className="absolute left-4 top-4 rounded-full border px-3 py-1 font-mono text-[11px] tracking-wider"
+            className="absolute left-4 top-4 z-30 rounded-full border px-3 py-1 font-mono text-[11px] tracking-wider"
             style={{
               borderColor: "var(--border)",
               color: "var(--foreground)",
@@ -165,7 +170,7 @@ function SwipeCard({
 
           {property.tag && (
             <div
-              className="absolute right-4 top-4 rounded-full px-3 py-1 text-[11px] font-medium tracking-wide"
+              className="absolute right-4 top-4 z-30 rounded-full px-3 py-1 text-[11px] font-medium tracking-wide"
               style={{ background: TOKENS.brass, color: TOKENS.bg }}
             >
               {property.tag}
@@ -174,7 +179,7 @@ function SwipeCard({
 
           {/* Price tag, deed-plaque style */}
           <div
-            className="absolute bottom-4 left-4 rounded-lg border px-3 py-1.5"
+            className="absolute bottom-4 left-4 z-30 rounded-lg border px-3 py-1.5"
             style={{
               borderColor: "var(--border)",
               background: "rgba(255,255,255,0.8)",

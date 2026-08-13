@@ -3,22 +3,40 @@ import { Building2, Handshake, ShieldCheck } from "lucide-react";
 
 export default function AboutPage() {
   return (
-    <div className="pt-24 md:pt-32 min-h-screen">
-      <div className="max-w-5xl mx-auto px-4 md:px-16 text-center mb-10 md:mb-20">
-        <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-primary">About Urbanest</span>
-        <h1 className="text-2xl sm:text-4xl md:text-6xl font-serif tracking-wide mt-3 md:mt-4 mb-4 md:mb-8 leading-tight">
-          We read the ground before you buy the plot.
-        </h1>
-        <p className="text-muted-foreground font-light text-sm md:text-lg leading-relaxed max-w-3xl mx-auto">
-          Urbanest Infra is India&apos;s channel partner for premium real estate — the desk
-          between discerning buyers and the developers who actually deliver. We bring
-          transparency, paperwork discipline, and a plain-spoken read on value to every deal.
-        </p>
+    <div className="min-h-screen">
+      {/* Hero Section - Full height to push collage below fold */}
+      <div className="min-h-[90vh] flex flex-col items-center justify-center pt-20 px-4 md:px-16 text-center">
+        <div className="max-w-5xl mx-auto">
+          <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-primary">About Urbanest</span>
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif tracking-wide mt-4 md:mt-6 mb-6 md:mb-10 leading-tight">
+            We read the ground before you buy the plot.
+          </h1>
+          <p className="text-muted-foreground font-light text-base md:text-xl leading-relaxed max-w-3xl mx-auto">
+            Urbanest Infra is India&apos;s channel partner for premium real estate — the desk
+            between discerning buyers and the developers who actually deliver. We bring
+            transparency, paperwork discipline, and a plain-spoken read on value to every deal.
+          </p>
+        </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 md:px-16 mb-12 md:mb-20">
-        <div className="relative aspect-[16/7] overflow-hidden border border-border plan-corners">
-          <img src="/images/about-01.jpeg" alt="Urbanest Infra project elevation" className="w-full h-full object-cover" />
+      <div className="max-w-6xl mx-auto px-4 md:px-8 mb-12 md:mb-24">
+        <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-2 md:gap-4 h-[40vh] md:h-[600px]">
+          <div className="col-span-2 row-span-2 relative overflow-hidden border border-border plan-corners group">
+            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
+            <img src="/images/sunnys-one-address/sunnys-one-address-1.png" alt="Luxury Villa" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+          </div>
+          <div className="relative overflow-hidden border border-border plan-corners group">
+            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
+            <img src="/images/sunnys-urban-oasis/sunnys-urban-oasis-1.png" alt="Premium Duplex" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+          </div>
+          <div className="relative overflow-hidden border border-border plan-corners group">
+            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
+            <img src="/images/sunnys-86-east/sunnys-86-east-1.jpeg" alt="Residential Apartments" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+          </div>
+          <div className="col-span-2 relative overflow-hidden border border-border plan-corners group">
+            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
+            <img src="/images/sumbridhi-green-park/sumbridhi-green-park-1.PNG" alt="Triplex Villas" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+          </div>
         </div>
       </div>
 
