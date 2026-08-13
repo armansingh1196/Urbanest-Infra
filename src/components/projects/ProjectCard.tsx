@@ -16,11 +16,11 @@ export function ProjectCard({ id, name, developer, location, price, imageUrl, ty
   return (
     <Link href={`/projects/${id}`} className="group block cursor-pointer h-full">
       <div className="plan-corners bg-card h-full flex flex-col overflow-hidden border border-border transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] hover:border-primary/30">
-        <div className="relative aspect-[4/3] w-full overflow-hidden">
+        <div className="relative pt-[75%] w-full overflow-hidden">
           <img
             src={imageUrl}
             alt={name}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div
             className="absolute inset-0"

@@ -381,7 +381,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
-              className="w-full h-full flex items-center justify-center p-4 md:p-12"
+              className="absolute inset-0 flex items-center justify-center p-4 md:p-12"
             >
               <img 
                 src={galleryTab === "photos" ? project.images[currentImageIndex] : (project.floorPlanImages?.[currentImageIndex] || project.images[currentImageIndex])} 
