@@ -61,8 +61,8 @@ const SWIPE_THRESHOLD = 120;
 const SWIPE_VELOCITY = 500;
 
 function formatPrice(value: number) {
-  if (value >= 1000000) return `₹${(value / 100000).toFixed(2)} Cr`;
-  return `₹${Math.round(value / 100000)} L`;
+  if (value >= 10000000) return `₹${(value / 10000000).toFixed(2)} Cr`;
+  return `₹${(value / 100000).toFixed(value % 100000 === 0 ? 0 : 2)} L`;
 }
 
 /* ---------------------------------------------------------------------
