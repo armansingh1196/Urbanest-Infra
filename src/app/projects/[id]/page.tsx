@@ -334,16 +334,6 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
               <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-none py-6 uppercase tracking-widest font-medium text-xs transition-transform hover:scale-[1.02] shadow-[0_0_20px_rgba(193,95,53,0.25)]">
                 Request Callback
               </Button>
-              {project.brochureUrl && (
-                <div className="pt-2">
-                  <a href={project.brochureUrl} target="_blank" rel="noopener noreferrer" className="block w-full">
-                    <Button type="button" variant="outline" className="w-full rounded-none py-6 uppercase tracking-widest font-medium text-xs transition-transform hover:scale-[1.02] border-primary text-primary hover:bg-primary/10">
-                      <Download className="w-4 h-4 mr-2" />
-                      Download Brochure
-                    </Button>
-                  </a>
-                </div>
-              )}
             </form>
           </div>
         </motion.div>
@@ -413,6 +403,23 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
             {currentImageIndex + 1} / {galleryTab === "photos" ? project.images.length : (project.floorPlanImages?.length || project.images.length)}
           </div>
         </div>
+      )}
+
+      {/* Floating Download Brochure Button */}
+      {project.brochureUrl && (
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.5 }}
+          className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[100]"
+        >
+          <a href={project.brochureUrl} target="_blank" rel="noopener noreferrer">
+            <Button className="rounded-full shadow-[0_10px_40px_rgba(193,95,53,0.3)] bg-primary hover:bg-primary/90 text-primary-foreground px-5 py-5 md:px-8 md:py-8 flex items-center justify-center gap-2 md:gap-3 transition-transform hover:scale-105">
+              <Download className="w-4 h-4 md:w-6 md:h-6" />
+              <span className="font-mono uppercase tracking-widest text-[10px] md:text-sm font-medium">Brochure</span>
+            </Button>
+          </a>
+        </motion.div>
       )}
     </div>
   );
