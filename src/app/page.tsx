@@ -44,7 +44,7 @@ export default function HomePage() {
         </motion.div>
 
         <motion.div
-          className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 mt-24 md:mt-20 flex flex-col justify-center h-full pt-8 md:pt-0 pb-8 md:pb-16"
+          className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 mt-16 md:mt-12 flex flex-col justify-center h-full pt-4 md:pt-0 pb-20 md:pb-28"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
@@ -82,9 +82,64 @@ export default function HomePage() {
         </motion.div>
       </section>
 
+      {/* Scroll Bridge — straddles hero bottom & next section top, aligned left */}
+      <div className="relative z-30 -mt-16 md:-mt-24 mb-0 pointer-events-none" style={{ height: 0 }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="flex flex-col items-start pl-2 md:pl-4" style={{ transform: "translateY(-20%)" }}>
+            {/* Vertical gradient line top */}
+            <motion.div
+              initial={{ scaleY: 0 }}
+              animate={{ scaleY: 1 }}
+              transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
+              className="w-px h-10 md:h-16 origin-top ml-[11px]"
+              style={{ background: "linear-gradient(to bottom, transparent, var(--primary))" }}
+            />
+
+            {/* Animated chevron + label */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.8 }}
+              className="flex items-center gap-3 md:gap-4"
+            >
+              <motion.div
+                animate={{ y: [0, 6, 0] }}
+                transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+                className="flex flex-col items-center"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-primary">
+                  <path d="M7 10l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-primary/40 -mt-3">
+                  <path d="M7 10l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </motion.div>
+
+              <motion.span
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 2.2 }}
+                className="font-mono text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-muted-foreground/60"
+              >
+                Let&apos;s Plan your New HOME
+              </motion.span>
+            </motion.div>
+
+            {/* Vertical gradient line bottom */}
+            <motion.div
+              initial={{ scaleY: 0 }}
+              animate={{ scaleY: 1 }}
+              transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
+              className="w-px h-10 md:h-16 origin-top ml-[11px]"
+              style={{ background: "linear-gradient(to bottom, var(--primary), transparent)" }}
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Property Matcher Section */}
       <motion.section
-        className="relative z-20 py-12 md:py-20 px-4 md:px-8 w-full bg-background border-t border-b border-border"
+        className="relative z-20 pt-16 md:pt-28 pb-12 md:pb-20 px-4 md:px-8 w-full bg-background border-t border-b border-border"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
