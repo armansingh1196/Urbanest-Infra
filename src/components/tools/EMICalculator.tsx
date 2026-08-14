@@ -256,6 +256,11 @@ export default function EMICalculator({ compact = false }: EMICalculatorProps) {
               </p>
             </div>
           </div>
+
+          {/* Explanatory Note */}
+          <p className="text-[10px] sm:text-xs text-muted-foreground font-light text-center mt-4 opacity-80 leading-relaxed max-w-sm">
+            * Note: Interest is calculated using the accurate reducing balance method, meaning you only pay interest on the remaining principal amount each month.
+          </p>
         </div>
       </div>
     </div>
