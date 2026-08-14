@@ -55,8 +55,9 @@ export function Footer() {
           <h3 className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] mb-4 md:mb-6 text-muted-foreground">Company</h3>
           <ul className="flex flex-col gap-2 md:gap-4 text-xs md:text-sm font-light">
             <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
+            <li><Link href="/team" className="hover:text-primary transition-colors">Our Team</Link></li>
             <li><Link href="/services" className="hover:text-primary transition-colors">Our Services</Link></li>
-            <li><Link href="/projects" className="hover:text-primary transition-colors">Partner Developers</Link></li>
+            <li><Link href="/careers" className="hover:text-primary transition-colors">Careers</Link></li>
             <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
           </ul>
         </div>
