@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, Info, CheckCircle2, Building2, Map, Shield, Layers, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { MapPin, Info, CheckCircle2, Building2, Map, Shield, Layers, X, ChevronLeft, ChevronRight, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, Variants } from "framer-motion";
 import { use, useState } from "react";
@@ -334,6 +334,16 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
               <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-none py-6 uppercase tracking-widest font-medium text-xs transition-transform hover:scale-[1.02] shadow-[0_0_20px_rgba(193,95,53,0.25)]">
                 Request Callback
               </Button>
+              {project.brochureUrl && (
+                <div className="pt-2">
+                  <a href={project.brochureUrl} target="_blank" rel="noopener noreferrer" className="block w-full">
+                    <Button type="button" variant="outline" className="w-full rounded-none py-6 uppercase tracking-widest font-medium text-xs transition-transform hover:scale-[1.02] border-primary text-primary hover:bg-primary/10">
+                      <Download className="w-4 h-4 mr-2" />
+                      Download Brochure
+                    </Button>
+                  </a>
+                </div>
+              )}
             </form>
           </div>
         </motion.div>

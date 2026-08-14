@@ -34,6 +34,7 @@ export interface ProjectData {
   specifications: ProjectSpecification[];
   floorPlans?: FloorPlan[];
   floorPlanImages?: string[];
+  brochureUrl?: string;
   // For PropertyMatcher mapping
   _matchStats: {
     priceValue: number;
@@ -113,6 +114,7 @@ export const PROJECTS: ProjectData[] = [
       "/images/sunnys-86-east/Plans/parking.png",
       "/images/sunnys-86-east/Plans/terrace-plan.png"
     ],
+    brochureUrl: "/brochures/sunnys-86-east/brochure.pdf",
     _matchStats: {
       priceValue: 7500000,
       beds: 3,
@@ -182,6 +184,7 @@ export const PROJECTS: ProjectData[] = [
       "/images/sunnys-one-address/Plans/floor-plan.png",
       "/images/sunnys-one-address/Plans/site-plan.png"
     ],
+    brochureUrl: "/brochures/sunnys-one-address/brochure.pdf",
     _matchStats: {
       priceValue: 18500000,
       beds: 4,
@@ -264,6 +267,7 @@ export const PROJECTS: ProjectData[] = [
       "/images/sunnys-urban-oasis/Plans/floor-plan.png",
       "/images/sunnys-urban-oasis/Plans/site-plan.png"
     ],
+    brochureUrl: "/brochures/sunnys-urban-oasis/brochure.pdf",
     _matchStats: {
       priceValue: 12500000,
       beds: 4,
@@ -332,6 +336,7 @@ export const PROJECTS: ProjectData[] = [
     floorPlanImages: [
       "/images/sumbridhi-green-park/Plans/site-plan.png"
     ],
+    brochureUrl: "/brochures/sumbridhi-green-park/brochure.pdf",
     _matchStats: {
       priceValue: 15500000,
       beds: 5,
@@ -398,6 +403,7 @@ export const PROJECTS: ProjectData[] = [
       "/images/triveni-vatika/Plans/ground-floor-plan.png",
       "/images/triveni-vatika/Plans/site-plan.png"
     ],
+    brochureUrl: "/brochures/triveni-vatika/brochure.pdf",
     _matchStats: {
       priceValue: 6900000,
       beds: 4,
