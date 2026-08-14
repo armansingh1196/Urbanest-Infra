@@ -186,7 +186,7 @@ export const PROJECTS: ProjectData[] = [
     ],
     brochureUrl: "/brochures/sunnys-one-address/brochure.pdf",
     _matchStats: {
-      priceValue: 18500000,
+      priceValue: 15000000,
       beds: 4,
       baths: 6,
       sqft: 3725,
@@ -269,7 +269,7 @@ export const PROJECTS: ProjectData[] = [
     ],
     brochureUrl: "/brochures/sunnys-urban-oasis/brochure.pdf",
     _matchStats: {
-      priceValue: 12500000,
+      priceValue: 8000000,
       beds: 4,
       baths: 3,
       sqft: 2180,
@@ -338,7 +338,7 @@ export const PROJECTS: ProjectData[] = [
     ],
     brochureUrl: "/brochures/sumbridhi-green-park/brochure.pdf",
     _matchStats: {
-      priceValue: 15500000,
+      priceValue: 15000000,
       beds: 5,
       baths: 4,
       sqft: 3128,
