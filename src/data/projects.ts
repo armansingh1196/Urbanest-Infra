@@ -109,9 +109,9 @@ export const PROJECTS: ProjectData[] = [
       { category: "Plumbing", details: ["Branded Jaguar sanitary fittings", "Water-saving fixtures"] },
     ],
     floorPlanImages: [
-      "/images/sunnys-86-east/plans/ground-floor-plan.png",
-      "/images/sunnys-86-east/plans/parking.png",
-      "/images/sunnys-86-east/plans/terrace-plan.png"
+      "/images/sunnys-86-east/Plans/ground-floor-plan.png",
+      "/images/sunnys-86-east/Plans/parking.png",
+      "/images/sunnys-86-east/Plans/terrace-plan.png"
     ],
     _matchStats: {
       priceValue: 7500000,
@@ -179,8 +179,8 @@ export const PROJECTS: ProjectData[] = [
       { category: "Security & Eco", details: ["24/7 CCTV surveillance", "Rainwater harvesting"] }
     ],
     floorPlanImages: [
-      "/images/sunnys-one-address/plans/floor-plan.png",
-      "/images/sunnys-one-address/plans/site-plan.png"
+      "/images/sunnys-one-address/Plans/floor-plan.png",
+      "/images/sunnys-one-address/Plans/site-plan.png"
     ],
     _matchStats: {
       priceValue: 18500000,
@@ -261,8 +261,8 @@ export const PROJECTS: ProjectData[] = [
       { category: "Features", details: ["Dedicated parking", "Puja cabinet", "Utility space"] }
     ],
     floorPlanImages: [
-      "/images/sunnys-urban-oasis/plans/floor-plan.png",
-      "/images/sunnys-urban-oasis/plans/site-plan.png"
+      "/images/sunnys-urban-oasis/Plans/floor-plan.png",
+      "/images/sunnys-urban-oasis/Plans/site-plan.png"
     ],
     _matchStats: {
       priceValue: 12500000,
@@ -330,7 +330,7 @@ export const PROJECTS: ProjectData[] = [
       { category: "Sustainability", details: ["Rainwater harvesting system"] },
     ],
     floorPlanImages: [
-      "/images/sumbridhi-green-park/plans/site-plan.png"
+      "/images/sumbridhi-green-park/Plans/site-plan.png"
     ],
     _matchStats: {
       priceValue: 15500000,
@@ -394,9 +394,9 @@ export const PROJECTS: ProjectData[] = [
       { category: "Sanitary & Plumbing", details: ["Jaguar / CERA or equivalent sanitary fittings and CP taps"] }
     ],
     floorPlanImages: [
-      "/images/triveni-vatika/plans/first-floor-plan.png",
-      "/images/triveni-vatika/plans/ground-floor-plan.png",
-      "/images/triveni-vatika/plans/site-plan.png"
+      "/images/triveni-vatika/Plans/first-floor-plan.png",
+      "/images/triveni-vatika/Plans/ground-floor-plan.png",
+      "/images/triveni-vatika/Plans/site-plan.png"
     ],
     _matchStats: {
       priceValue: 6900000,
