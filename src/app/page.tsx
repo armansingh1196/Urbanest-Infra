@@ -49,7 +49,7 @@ export default function HomePage() {
           animate="visible"
           variants={staggerContainer}
         >
-          <motion.span variants={fadeInUp} className="font-mono text-xs uppercase tracking-[0.3em] text-primary mb-6">
+          <motion.span variants={fadeInUp} className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-primary mb-6">
             Premium Real Estate Advisory
           </motion.span>
           <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-7xl font-serif text-foreground tracking-wide leading-[1.05] mb-4 md:mb-6 max-w-4xl">
